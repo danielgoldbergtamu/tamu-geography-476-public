@@ -21,6 +21,21 @@ Every page is standalone HTML with its styling inline. There is no build step, n
 JavaScript, and no images — open any file in a browser, or paste its source into a
 Canvas page and it arrives intact.
 
+## Browse it, or take a copy
+
+**Browse:** https://danielgoldbergtamu.github.io/tamu-geography-476-public/ — the
+pages link to each other, so you can read the course the way a student meets it.
+
+**Take a copy:** the green **Code** button above → **Download ZIP**, or
+
+```
+git clone https://github.com/danielgoldbergtamu/tamu-geography-476-public.git
+```
+
+Everything is plain files. Nothing here needs a server, a build step, or an
+account — opening `index.html` from a downloaded folder works exactly the same as
+the hosted site.
+
 ## Where to start
 
 | If you want | Open |
