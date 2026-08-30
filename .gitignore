@@ -1,0 +1,6 @@
+# This repository holds generated course pages and nothing else. It is written
+# by tools/build_public.py in the course's private repository; do not edit files
+# here, because the next publish overwrites them.
+.DS_Store
+Thumbs.db
+*.tmp
