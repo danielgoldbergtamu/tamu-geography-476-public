@@ -1,0 +1,98 @@
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Using TAMU AI from your own computer</title>
+<meta name="editing_roles" content="teachers"/>
+<meta name="workflow_state" content="active"/>
+<meta name="editor_type" content="rce"/>
+<style>html{-webkit-text-size-adjust:100%}body{margin:0 auto;padding:28px 32px 64px;max-width:900px;background:#ffffff;color:#2b2724;font:16px/1.65 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}img{max-width:100%;height:auto}table{width:100%}@media (max-width:640px){body{padding:18px 16px 48px}}</style>
+</head>
+<body>
+<h2 style="border-top:8pt solid #500000;background:#EAEAEA;padding:8px 6px 6px;text-align:center;margin:0 0 4px;font-size:16pt;"><span style="color:#000000;">Using TAMU AI from your own computer</span></h2><p style="margin:2px 0 0;text-align:center;font-size:11pt;color:#5A5A5A;">Optional. Nothing in this course requires any of this.</p><p>&nbsp;</p>
+<p><strong>Optional. Nothing in this course requires any of this.</strong></p>
+<p>Everything GEOG 476 asks of you can be done in the browser at <code>chat.tamu.ai</code>, and the Knowledge Collections feature already handles working with your own files. This page is for the students who want the tools on their own machine — usually because they are scripting an analysis and want the model in the same place as the code.</p>
+<p>Read the last section before you start. There are three things about this route that will bite you mid-semester if nobody tells you, and one governance question you should not answer on your own.</p>
+<hr aria-hidden="true" style="border:0;border-top:2px solid #EAEAEA;margin:22px 0;" />
+<h3 style="border-left:8pt solid #500000;background:#EAEAEA;padding:5px 6px;text-align:left;margin:18px 0 8px;font-size:13pt;"><strong><span style="color:#000000;">1. Get an API key</span></strong></h3>
+<p><em>Profile icon → <strong>Settings</strong> → <strong>Account</strong> → <strong>Show</strong> next to API Key → <strong>+ Create new secret key</strong></em>, then copy it.</p>
+<p><strong>Two conditions that silently break keys.</strong> Both are in the university's own documentation and neither is obvious:</p>
+<ol style="margin:8px 0 8px 22px;"><li style="margin-bottom:6px;">You must <strong>create at least one chat in the web console before the key works at all.</strong></li><li style="margin-bottom:6px;">You must <strong>create or update a chat at least once every 30 days</strong> or the key stops working.</li></ol>
+<p>That second one is the one that gets people. Set up a CLI in week one, live in the terminal, never reopen the browser, and around week six you get an authentication error that explains nothing. <strong>Open <code>chat.tamu.ai</code> and send one message every few weeks.</strong> Put a reminder in your calendar.</p>
+<p><strong>Treat the key like a password.</strong> Do not paste it into a document, a screenshot, a ticket, a Discord message, or a file you might commit to git. It authenticates <em>you</em> against a service approved for regulated university data.</p>
+<hr aria-hidden="true" style="border:0;border-top:2px solid #EAEAEA;margin:22px 0;" />
+<h3 style="border-left:8pt solid #500000;background:#EAEAEA;padding:5px 6px;text-align:left;margin:18px 0 8px;font-size:13pt;"><strong><span style="color:#000000;">2. Point a tool at the endpoint</span></strong></h3>
+<p>The Texas A&amp;M University endpoint is:</p>
+<pre style="background:#F7F5F4;border-left:5px solid #500000;padding:10px 14px;margin:12px 0;overflow-x:auto;font-size:11pt;line-height:1.5;"><code>https://chat-api.tamu.ai</code></pre>
+<p>The same host speaks more than one protocol, which is why so many tools connect:</p>
+<table style="border-collapse:collapse;width:100%;margin:12px 0;"><caption style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;"><strong>2. Point a tool at the endpoint</strong></caption><thead><tr><th scope="col" style="background:#500000;color:#ffffff;padding:7px 9px;text-align:left;font-size:11pt;">Shape</th><th scope="col" style="background:#500000;color:#ffffff;padding:7px 9px;text-align:left;font-size:11pt;">Base URL</th><th scope="col" style="background:#500000;color:#ffffff;padding:7px 9px;text-align:left;font-size:11pt;">Tools</th></tr></thead><tbody><tr><td style="padding:7px 9px;border-bottom:1px solid #DDD8D4;background:#ffffff;font-size:11pt;vertical-align:top;">OpenAI-compatible</td><td style="padding:7px 9px;border-bottom:1px solid #DDD8D4;background:#ffffff;font-size:11pt;vertical-align:top;"><code>https://chat-api.tamu.ai/api</code></td><td style="padding:7px 9px;border-bottom:1px solid #DDD8D4;background:#ffffff;font-size:11pt;vertical-align:top;">OpenCode, LLM, most "custom OpenAI endpoint" apps</td></tr><tr><td style="padding:7px 9px;border-bottom:1px solid #DDD8D4;background:#F7F5F4;font-size:11pt;vertical-align:top;">Anthropic-compatible</td><td style="padding:7px 9px;border-bottom:1px solid #DDD8D4;background:#F7F5F4;font-size:11pt;vertical-align:top;"><code>https://chat-api.tamu.ai/api</code></td><td style="padding:7px 9px;border-bottom:1px solid #DDD8D4;background:#F7F5F4;font-size:11pt;vertical-align:top;">Claude Code</td></tr></tbody></table>
+<p>Model names carry a <code>protected.</code> prefix — for example <code>protected.gemini-2.5-flash-lite</code>, <code>protected.Claude Sonnet 4.6</code>, <code>protected.gpt-4.1</code>. Get the current list by asking the API:</p>
+<p><strong>Windows PowerShell</strong></p>
+<pre style="background:#F7F5F4;border-left:5px solid #500000;padding:10px 14px;margin:12px 0;overflow-x:auto;font-size:11pt;line-height:1.5;"><code>$env:KEY = "YOUR_API_KEY_HERE"
+Invoke-RestMethod -Uri "https://chat-api.tamu.ai/api/models" `
+  -Headers @{Authorization = "Bearer $env:KEY"} -Method Get |
+  Select-Object -ExpandProperty data | ForEach-Object { $_.id }</code></pre>
+<p><strong>macOS / Linux</strong></p>
+<pre style="background:#F7F5F4;border-left:5px solid #500000;padding:10px 14px;margin:12px 0;overflow-x:auto;font-size:11pt;line-height:1.5;"><code>export KEY=YOUR_API_KEY_HERE
+curl -s https://chat-api.tamu.ai/api/models \
+  -H "Authorization: Bearer $KEY" | jq -r '.data[].id'</code></pre>
+<p>If that returns a list of model names, everything downstream will work. If it does not, stop here and fix it before installing anything.</p>
+<hr aria-hidden="true" style="border:0;border-top:2px solid #EAEAEA;margin:22px 0;" />
+<h3 style="border-left:8pt solid #500000;background:#EAEAEA;padding:5px 6px;text-align:left;margin:18px 0 8px;font-size:13pt;"><strong><span style="color:#000000;">3. The three tools A&amp;M documents</span></strong></h3>
+<p>These are the supported route. If something breaks and you email the help desk, these are the ones they will recognize.</p>
+<h4 style="margin:22px 0 8px;padding:0 0 4px;font-size:12pt;color:#500000;border-bottom:1px solid #DDD8D4;"><strong>OpenCode — a coding agent in the terminal</strong></h4>
+<p>Install with <code>winget install SST.opencode</code> (Windows) or <code>brew install opencode</code>.</p>
+<p>Create <code>%USERPROFILE%\.config\opencode\opencode.json</code> (or <code>~/.config/opencode/opencode.json</code>):</p>
+<pre style="background:#F7F5F4;border-left:5px solid #500000;padding:10px 14px;margin:12px 0;overflow-x:auto;font-size:11pt;line-height:1.5;"><code>{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "chat.tamu.ai": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "TAMUS AI Chat API",
+      "options": { "baseURL": "https://chat-api.tamu.ai/api" },
+      "models": {
+        "protected.Claude Sonnet 4.5": { "name": "Claude Sonnet 4.5" },
+        "protected.gemini-2.5-flash-lite": { "name": "Gemini 2.5 Flash Lite" }
+      }
+    }
+  },
+  "model": "chat.tamu.ai/protected.Claude Sonnet 4.5"
+}</code></pre>
+<p>Run <code>opencode</code>, type <code>/connect</code>, search for <code>tamu</code>, and paste your key when asked. It is stored separately from the config file.</p>
+<h4 style="margin:22px 0 8px;padding:0 0 4px;font-size:12pt;color:#500000;border-bottom:1px solid #DDD8D4;"><strong>Claude Code — the same idea, Anthropic's client</strong></h4>
+<p><code>winget install Anthropic.ClaudeCode</code> or <code>brew install --cask claude-code</code>.</p>
+<pre style="background:#F7F5F4;border-left:5px solid #500000;padding:10px 14px;margin:12px 0;overflow-x:auto;font-size:11pt;line-height:1.5;"><code># claude.env.ps1
+$env:ANTHROPIC_BASE_URL = "https://chat-api.tamu.ai/api"
+$env:ANTHROPIC_AUTH_TOKEN = "&lt;your key&gt;"
+$env:ANTHROPIC_MODEL = "protected.Claude Sonnet 4.6"</code></pre>
+<p>Then <code>. .\claude.env.ps1</code> and <code>claude</code>. Check with <code>/model</code>.</p>
+<p>This uses the Claude Code <em>software</em> against A&amp;M's endpoint. It is not an Anthropic subscription and does not give you one.</p>
+<h4 style="margin:22px 0 8px;padding:0 0 4px;font-size:12pt;color:#500000;border-bottom:1px solid #DDD8D4;"><strong>LLM — one-shot questions from a script</strong></h4>
+<p><code>pip install llm</code>, then <code>llm keys set chat.tamu.ai</code>. The university's docs carry a setup script that registers every available model. Afterward:</p>
+<pre style="background:#F7F5F4;border-left:5px solid #500000;padding:10px 14px;margin:12px 0;overflow-x:auto;font-size:11pt;line-height:1.5;"><code>llm "explain what a spatial join does"
+llm -x "write a python script that reprojects a shapefile" &gt; reproject.py</code></pre>
+<p>Useful when you want a model inside a pipeline rather than a conversation.</p>
+<hr aria-hidden="true" style="border:0;border-top:2px solid #EAEAEA;margin:22px 0;" />
+<h3 style="border-left:8pt solid #500000;background:#EAEAEA;padding:5px 6px;text-align:left;margin:18px 0 8px;font-size:13pt;"><strong><span style="color:#000000;">4. Desktop apps with a normal interface</span></strong></h3>
+<p>Several free desktop applications accept a custom OpenAI-compatible endpoint and will connect to <code>https://chat-api.tamu.ai/api</code> with your key. They give you a chat window rather than a terminal, and most can point at a local folder.</p>
+<p>Ones that work this way include <strong>Chatbox</strong>, <strong>Jan</strong>, <strong>AnythingLLM</strong> and <strong>Msty</strong>, and in VS Code the <strong>Continue</strong> and <strong>Cline</strong> extensions.</p>
+<p><strong>Read this before you install one.</strong></p>
+<p>These are third-party applications that the university has not reviewed. Using one means <strong>putting a credential for a HIPAA/FERPA-approved endpoint into software nobody at A&amp;M has vetted, on a machine that may hold client data.</strong> That is a real question and it is not one for you or me to answer casually.</p>
+<p>So:</p>
+<ul style="margin:8px 0 8px 22px;"><li style="margin-bottom:5px;"><strong>Ask first.</strong> <code>helpdesk@tamu.edu</code> — tell them the application, that it stores a TAMU AI Chat API key locally, and that you want to know whether that is acceptable. It is a short email and the answer is useful to everyone.</li><li style="margin-bottom:5px;"><strong>Until you have an answer, do not put client material through one.</strong> The browser and the three documented CLIs are unambiguously fine; that is what they are for.</li><li style="margin-bottom:5px;"><strong>If you install one anyway, keep it to your own coursework</strong>, and remember the key is yours — anything done with it is attributed to you.</li></ul>
+<p>I would rather you asked and got a yes than assumed and got it wrong. This is also good practice for the actual job: the question <em>"has anyone approved this tool for this class of data?"</em> is one you will be asked to answer for real.</p>
+<h4 style="margin:22px 0 8px;padding:0 0 4px;font-size:12pt;color:#500000;border-bottom:1px solid #DDD8D4;"><strong>If you want an agent, not a chat window</strong></h4>
+<p><strong>Claude Code already does this</strong> — section 3 above shows it, and it is the route to use. What you cannot do is the thing everyone asks for first: point <strong>Claude Desktop</strong>, or any of the polished graphical clients, at TAMU AI. Those apps have nowhere to put a custom endpoint, so the key has no home in them. That would be the nicest setup available and it is not currently possible.</p>
+<p>If you want an agent with an interface rather than a terminal, the workaround is an agent platform that <em>does</em> take a custom endpoint. <strong>Hermes</strong> is the one I use: you install it on your own machine, point it at <code>https://chat-api.tamu.ai/api</code> with your key, and get agent behavior running on the university credits rather than on a subscription of your own. Everything in the box above applies to it — third-party software holding a credential for a protected endpoint, so ask the help desk before client material goes through it.</p>
+<p><strong>This is optional and nobody needs it to pass.</strong> If you want it set up, ask me and I will walk you through it, in office hours or in a studio, once your basic setup in sections 1 to 3 is working.</p>
+<hr aria-hidden="true" style="border:0;border-top:2px solid #EAEAEA;margin:22px 0;" />
+<h3 style="border-left:8pt solid #500000;background:#EAEAEA;padding:5px 6px;text-align:left;margin:18px 0 8px;font-size:13pt;"><strong><span style="color:#000000;">5. Three things that will bite you</span></strong></h3>
+<p><strong>The budget is invisible from the API.</strong> You get a fixed token allowance per day, and the API cannot tell you how much is left — only the dollar-sign icon in the browser can. A long session against a large model will exhaust it without warning, and it resets in the early evening Central time, not at midnight.</p>
+<p><strong>The key expires from disuse.</strong> Thirty days without touching the web console and it stops working. See section 1.</p>
+<p><strong>The API is for individuals, prototyping and learning.</strong> The university is explicit about this: it is not for multi-user applications or anything production-shaped. If your project genuinely needs that, the answer is a cloud AI platform and a conversation with Technology Services, not this key.</p>
+<hr aria-hidden="true" style="border:0;border-top:2px solid #EAEAEA;margin:22px 0;" />
+<h3 style="border-left:8pt solid #500000;background:#EAEAEA;padding:5px 6px;text-align:left;margin:18px 0 8px;font-size:13pt;"><strong><span style="color:#000000;">6. If it stops working</span></strong></h3>
+<ol style="margin:8px 0 8px 22px;"><li style="margin-bottom:6px;">Send one message in <code>chat.tamu.ai</code>. This fixes the 30-day expiry and it is the most common cause by a wide margin.</li><li style="margin-bottom:6px;">Re-run the <code>/api/models</code> call in section 2. If it fails, the problem is the key or the network, not the tool.</li><li style="margin-bottom:6px;">Check the model name is exactly right, <code>protected.</code> prefix included.</li><li style="margin-bottom:6px;">Check your budget in the browser.</li><li style="margin-bottom:6px;">Still stuck: <code>helpdesk@tamu.edu</code>, and bring the exact error text.</li></ol>
+<p>Then bring it to studio. Somebody else has probably hit the same thing, and if they have not, it is worth the room knowing.</p>
+</body>
+</html>
