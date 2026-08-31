@@ -4,3 +4,12 @@
 .DS_Store
 Thumbs.db
 *.tmp
+
+# Deliberately NOT under Foreman's synced-ignores block. A rules sync wrote that block
+# here on 30 August 2026, carrying internal process language into a world-readable
+# repository; init_project.py now requires a CLAUDE.md before it will write to a folder,
+# so this repository is skipped. Keep these entries local.
+_scratch/
+~$*
+__pycache__/
+*.pyc
