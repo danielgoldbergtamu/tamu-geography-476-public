@@ -13,3 +13,14 @@ _scratch/
 ~$*
 __pycache__/
 *.pyc
+
+# NOTHING BUT COURSE PAGES. A workspace rules sweep committed tools/gitcommit.sh -
+# 362 lines of internal build tooling, with workspace paths and internal rule numbers -
+# and a stray git lock file into this world-readable repository on 31 August 2026, and
+# it was pushed. It is the second time a sweep has written into this repo; the first
+# wrote its own ignore block, which is what the note above is about. The publisher's
+# allowlist cannot stop this, because a sweep commits directly and never runs the
+# publisher. So the ignore list refuses the two directories a sweep reaches for.
+tools/
+_to_delete/
+_scratch/
