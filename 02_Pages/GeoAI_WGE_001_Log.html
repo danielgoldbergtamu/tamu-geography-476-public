@@ -1,0 +1,284 @@
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Texas counties with documented screwworm cases, across time — the full record</title>
+<meta name="editing_roles" content="teachers"/>
+<meta name="workflow_state" content="active"/>
+<meta name="editor_type" content="rce"/>
+<style>html{-webkit-text-size-adjust:100%}body{margin:0 auto;padding:28px 32px 64px;max-width:900px;background:#ffffff;color:#2b2724;font:16px/1.65 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}img{max-width:100%;height:auto}table{width:100%}@media (max-width:640px){body{padding:18px 16px 48px}}</style>
+</head>
+<body>
+<h2 style="border-top:8pt solid #500000;background:#EAEAEA;padding:8px 6px 6px;text-align:center;margin:0 0 4px;font-size:16pt;"><span style="color:#000000;">Texas counties with documented screwworm cases, across time — the full record</span></h2><p style="margin:2px 0 0;text-align:center;font-size:11pt;color:#5A5A5A;">GeoAI Worked Example · the full record</p><p>&nbsp;</p>
+<p><em>GeoAI Worked Example · the full record</em></p>
+<p><strong>This is a raw working record, not a polished document.</strong> It was written as the work happened, and it is published to you unedited because an edited version would teach the opposite of what occurred.</p>
+<p>It refers to the machinery this course is built from — rule numbers like R123, register files, configuration paths. <strong>You are not expected to know any of that</strong>, and none of it is on any assessment. It is left in because removing it would mean rewriting the record, and a rewritten record is not a record.</p>
+<p>Read it for three things: a confident claim that turned out to be wrong, a source that contradicted something already written down, and a point where the easy answer was refused. Those three are why this file exists.</p>
+<hr aria-hidden="true" style="border:0;border-top:2px solid #EAEAEA;margin:22px 0;" />
+<p><strong>1 September 2026. Instructor and assistant. No students are in this log.</strong></p>
+<p><strong>What this is.</strong> The unedited exchange in which the instructor described a GIS task and the assistant carried it out, captured because he asked for it in those terms: <em>"By capture, I meant capture the verbatim chat here so I can show everything to the students."</em></p>
+<p><strong>Why it was captured.</strong> His words, at the moment he set the task: <em>"this was the first time I actually described a GIS thing that I wanted you to do. This is an important test case to see if you can understand the job, find the data, build the map, and present it to me. This will have an impact on what I expect students to be able to do with AI during the actual GIS work for their projects."</em></p>
+<p><strong>Three things about the fidelity of this document, stated up front because a transcript that hides its own limits is not evidence.</strong></p>
+<ol style="margin:8px 0 8px 22px;"><li style="margin-bottom:6px;"><strong>The instructor's messages are reproduced exactly.</strong> The assistant's messages are reproduced from the session in which they were written, not read back off an external log — the distinction matters in a course that grades students on exactly this kind of claim.</li><li style="margin-bottom:6px;"><strong>The images are not in this file.</strong> Markdown cannot carry them and they are not re-describable without becoming a summary. Every render is named by its path at the moment it was looked at, with what was seen and what changed.</li><li style="margin-bottom:6px;"><strong>Where long tool output is cut, it says so and says what was cut.</strong> Nothing is silently trimmed.</li></ol>
+<p><strong>On R85.</strong> That rule governs recordings of taught sessions and exists because students did not consent to being analyzed. Nobody is in this log but the instructor and the assistant, so it does not reach here. It is committed for the same reason the lecture reviews are.</p>
+<p><strong>A note on where this file lives.</strong> <code>12_Instructor_Materials/worked_session/</code> is declared as the log of <em>the instructor working an assignment through an AI tool as a student would</em>. This is the mirror image — the instructor directing the assistant to do professional work — and it is the same artifact class, evidence rather than product. <strong>The directory's purpose line should be widened to say so rather than this document quietly stretching it.</strong> Flagged, not done.</p>
+<hr aria-hidden="true" style="border:0;border-top:2px solid #EAEAEA;margin:22px 0;" />
+<h3 style="border-left:8pt solid #500000;background:#EAEAEA;padding:5px 6px;text-align:left;margin:18px 0 8px;font-size:13pt;"><strong><span style="color:#000000;">Turn 1 — the task</span></strong></h3>
+<blockquote style="border-left:5px solid #B08A2E;background:#FBF8F0;margin:12px 0;padding:10px 16px;"><p style="margin:0;"><strong>INSTRUCTOR:</strong>  I would like to include a map that shows the counties of texas, with which ones have documented cases, across time if possible. Perhaps more than one map to show the time aspect.  Make a note for the paper, reports, and presentations that this was the first time I actually described a GIS thing that I wanted you to do. This is an important test case to see if you can understand the job, find the data, build the map, and present it to me. This will have an impact on what I expect students to be able to do with AI during the actual GIS work for their projects.</p></blockquote>
+<hr aria-hidden="true" style="border:0;border-top:2px solid #EAEAEA;margin:22px 0;" />
+<h3 style="border-left:8pt solid #500000;background:#EAEAEA;padding:5px 6px;text-align:left;margin:18px 0 8px;font-size:13pt;"><strong><span style="color:#000000;">Turn 2 — the assistant, before doing anything</span></strong></h3>
+<blockquote style="border-left:5px solid #B08A2E;background:#FBF8F0;margin:12px 0;padding:10px 16px;"><p style="margin:0;"><strong>ASSISTANT:</strong>  <strong>Received — and I want to be straight with you about this one before I start, because you've framed it as a test and the honest answer to part of it is "the data may not exist."</strong>  <strong>What you asked for:</strong> Texas counties, which ones have documented cases, across time, probably as several maps.  <strong>What I know I have.</strong> The chronology register carries county-level facts at specific dates: Zavala on 3 June; nine confirmations across Zavala, La Salle, Gillespie, Edwards and Tom Green on 12 June; a twelve-county quarantine on the same date, named; and the first two zone releases on 31 August covering La Salle, Webb, Gillespie, Kerr and Kimble.  <strong>What I do not have, and said so in the research a few hours ago.</strong> A county-by-county time series. The 10 August figure is <em>45 detections across 44 Texas counties</em> — a count, with no county list attached. The APHIS confirmed-detections dashboard is an embedded dashboard, not page text, with no documented bulk export. <strong>That is the single highest-value, highest-friction dataset in the whole project, and it is already written into <code>not_recorded:</code> in the register.</strong>  <strong>So here is my plan, in order, and I'll tell you what each step actually returns:</strong>  1. <strong>Try to find the county list properly</strong> — TAHC's emergency page and APHIS's status pages, fetched now rather than assumed. If a county list exists in text anywhere, I'll have it. 2. <strong>Get Texas county geometry.</strong> Natural Earth has no US counties, and I expect census.gov to be blocked — but <code>raw.githubusercontent.com</code> is open and the standard county GeoJSON keyed by FIPS is there. That's the route. 3. <strong>Build small multiples</strong> — one Texas map per time slice, showing what was documented as of each date. 4. <strong>Draw the distinction on the face of the map.</strong> Counties with a confirmed detection, counties under quarantine, and counties released are three different facts and I will not merge them into one "affected" class. <strong>Where the record is a count with no counties attached, the map will say so rather than leaving a blank map to imply zero.</strong>  <strong>The thing I want you to watch for in the result</strong> — since this is a test — is step 4. Getting a choropleth to render is not the hard part. The hard part is not letting the map assert more than the record supports, and this dataset is a trap for exactly that: a county with no shading means <em>nobody published a county</em>, not <em>no cases</em>. That is the same lesson as slide 9 of your own deck.  Starting step 1.</p></blockquote>
+<p><strong>Comment for teaching, written at the time rather than afterward.</strong> The plan above contains a prediction that turned out to be <strong>wrong in the useful direction</strong>: it says the county-level data does not exist. Step 1 found that it partly does. The next turns are what that looked like.</p>
+<hr aria-hidden="true" style="border:0;border-top:2px solid #EAEAEA;margin:22px 0;" />
+<h3 style="border-left:8pt solid #500000;background:#EAEAEA;padding:5px 6px;text-align:left;margin:18px 0 8px;font-size:13pt;"><strong><span style="color:#000000;">Turn 3 — going and looking</span></strong></h3>
+<p>The assistant did not reason about what the data <em>probably</em> contained. It fetched the pages.</p>
+<h4 style="margin:22px 0 8px;padding:0 0 4px;font-size:12pt;color:#500000;border-bottom:1px solid #DDD8D4;"><strong>Call 1 — the state authority</strong></h4>
+<pre style="background:#F7F5F4;border-left:5px solid #500000;padding:10px 14px;margin:12px 0;overflow-x:auto;font-size:11pt;line-height:1.5;"><code>WebFetch
+  url:    https://www.tahc.texas.gov/emergency/nws.html
+  prompt: List every Texas county named on this page in connection with New World
+          screwworm — for each, say whether it is named as having a confirmed
+          detection/case, as being under quarantine or in an infested zone, or as
+          having been released. Give any dates attached to each. Quote the exact
+          county names and any counts. If the page gives a total number of
+          detections or affected counties, give that too.</code></pre>
+<p><strong>Returned, in full:</strong></p>
+<pre style="background:#F7F5F4;border-left:5px solid #500000;padding:10px 14px;margin:12px 0;overflow-x:auto;font-size:11pt;line-height:1.5;"><code># Texas Counties Named in Connection with New World Screwworm
+
+**Quarantine/Infested Zone (12 counties):**
+"Coke, Edwards, Gillespie, Kerr, Kimble, La Salle, Sutton, Tom Green, Uvalde,
+ Val Verde, Webb, Zavala"
+
+**Confirmed Detections:**
+
+- **Zavala County** (3 cases): June 3, 2026 (index case—three-week-old calf);
+  June 5, 2026 (30-day-old calf); June 11, 2026 (calf)
+- **Edwards County** (2 cases): June 9, 2026 (calf); June 11, 2026 (goat)
+- **La Salle County** (2 cases): June 7, 2026 (one-week-old calf);
+  June 9, 2026 (calf)
+- **Gillespie County** (1 case): June 8, 2026 (goat)
+- **Tom Green County** (1 case): June 12, 2026 (calf)
+
+**Total:** 12 counties under quarantine; 9 confirmed detections across 5 counties.
+
+No counties are mentioned as having been released from quarantine or infested
+status.</code></pre>
+<p><strong>This is more than the assistant expected.</strong> Nine cases, each with a county, a date and a species. That is a real time series for June.</p>
+<p><strong>And it contains the first contradiction, in its last line.</strong> The project's own chronology register already recorded, from trade press reporting an APHIS action, that on 31 August two infested zones covering La Salle, Webb, Gillespie, Kerr and Kimble were released. <strong>The state agency's own page names no released counties.</strong> One of those is stale and there is no way to tell which from the outside. It was written into the register as a disagreement rather than resolved — see <code>released_conflict</code> in <code>content/projects/screwworm_chronology.yaml</code>.</p>
+<h4 style="margin:22px 0 8px;padding:0 0 4px;font-size:12pt;color:#500000;border-bottom:1px solid #DDD8D4;"><strong>Call 2 — the federal dashboard, checked rather than assumed</strong></h4>
+<pre style="background:#F7F5F4;border-left:5px solid #500000;padding:10px 14px;margin:12px 0;overflow-x:auto;font-size:11pt;line-height:1.5;"><code>WebFetch
+  url:    https://www.aphis.usda.gov/animals/animal-health/livestock-and-poultry-
+          disease/current-status/us-confirmed-cases-new-world
+  prompt: Does this page list, in text, the individual US counties with confirmed
+          New World screwworm detections? If yes, list every county and state
+          named, with any dates and counts. If the county data is only inside an
+          embedded dashboard or visualization and not present as page text, say
+          that explicitly and describe what IS present as text (totals, dates,
+          links to any downloadable file or API).</code></pre>
+<p><strong>Returned, in full:</strong></p>
+<pre style="background:#F7F5F4;border-left:5px solid #500000;padding:10px 14px;margin:12px 0;overflow-x:auto;font-size:11pt;line-height:1.5;"><code># New World Screwworm County Data
+
+**No individual counties are listed as text on this page.**
+
+The page explicitly states: "The dashboard captures **individual animal cases**
+by county and state, animal type and **species**, confirmation date, and status."
+However, this detailed county-level data is contained only within an embedded
+dashboard visualization hosted at a separate USDA URL.
+
+**What IS present as text:**
+- General descriptions of case statuses (active vs. inactive)
+- Information about infested zones
+- Links to state-specific websites: Texas Animal Health Commission and New
+  Mexico Livestock Board
+- A note that the page provides "a current snapshot" but directs users to the
+  embedded dashboard for specific details
+
+The granular county and animal-level confirmation data referenced in the page
+description is not accessible through the text content alone.</code></pre>
+<p><strong>The prior finding held here, and it is worth noticing that it was re-checked rather than cited.</strong> The research pass earlier the same morning had already said the APHIS dashboard is not scrapable. It would have been cheaper to repeat that. It was fetched again because the claim was about to be load-bearing for a map.</p>
+<h4 style="margin:22px 0 8px;padding:0 0 4px;font-size:12pt;color:#500000;border-bottom:1px solid #DDD8D4;"><strong>Call 3 — searching, because two sources were not enough</strong></h4>
+<pre style="background:#F7F5F4;border-left:5px solid #500000;padding:10px 14px;margin:12px 0;overflow-x:auto;font-size:11pt;line-height:1.5;"><code>WebSearch
+  query: Texas counties list New World screwworm confirmed detections
+         August 2026 county-by-county</code></pre>
+<p><strong>Returned (titles and URLs only; the search tool returns no page text):</strong></p>
+<pre style="background:#F7F5F4;border-left:5px solid #500000;padding:10px 14px;margin:12px 0;overflow-x:auto;font-size:11pt;line-height:1.5;"><code>47 confirmed New World screwworm infestations: Texas tracker and what you need
+  to know – Houston Public Media
+  https://www.houstonpublicmedia.org/articles/news/energy-environment/animals/
+  2026/08/26/556427/texas-new-world-screwworm-tracker/
+New World screwworm tracker: Confirmed Texas cases and what you need to know |
+  Texas Standard
+  https://texasstandard.org/stories/new-world-screwworm-cases-texas/
+44 confirmed New World screwworm infestations: Texas tracker and what you need
+  to know
+  https://www.kedt.org/2026-08-01/44-confirmed-new-world-screwworm-
+  infestations-texas-tracker-and-what-you-need-to-know
+47 confirmed New World screwworm infestations: Texas tracker and what you need
+  to know
+  https://www.kedt.org/2026-08-26/47-confirmed-new-world-screwworm-
+  infestations-texas-tracker-and-what-you-need-to-know
+USDA Confirms New World Screwworm in Texas
+  https://www.aphis.usda.gov/news/agency-announcements/usda-confirms-presence-
+  new-world-screwworm-united-states
+Current Status of New World Screwworm | Screwworm.gov
+  https://www.aphis.usda.gov/animals/animal-health/livestock-and-poultry-
+  disease/current-status
+Texas Adds a New Screwworm Zone in Terrell County as Active U.S. Cases Fall to
+  Five
+  https://www.medicaldaily.com/screwworm-terrell-county-infested-zone-45-
+  detections-august-2026-477052
+New Fact Sheet: New World screwworm
+  https://agrilifeextension.tamu.edu/asset-local/district-9</code></pre>
+<p><strong>Note the shape of that result set.</strong> The same syndicated tracker appears at three dates — 44 infestations on 1 August, 47 on 26 August. <strong>A tracker republished at intervals is a time series in disguise</strong>, and that is what made the "across time" half of the request answerable at all.</p>
+<h4 style="margin:22px 0 8px;padding:0 0 4px;font-size:12pt;color:#500000;border-bottom:1px solid #DDD8D4;"><strong>Call 4 — the 1 August snapshot</strong></h4>
+<pre style="background:#F7F5F4;border-left:5px solid #500000;padding:10px 14px;margin:12px 0;overflow-x:auto;font-size:11pt;line-height:1.5;"><code>WebFetch
+  url:    https://texasstandard.org/stories/new-world-screwworm-cases-texas/
+  prompt: This is a tracker of confirmed New World screwworm cases in Texas. List
+          EVERY Texas county named, with the confirmation date and the
+          animal/species for each case if given. Also give the running total of
+          confirmed infestations and the date the page was last updated. If the
+          page names counties that are infested zones or quarantine zones
+          separately from confirmed cases, list those separately.</code></pre>
+<p><strong>Returned, in full:</strong></p>
+<pre style="background:#F7F5F4;border-left:5px solid #500000;padding:10px 14px;margin:12px 0;overflow-x:auto;font-size:11pt;line-height:1.5;"><code># New World Screwworm Cases in Texas
+
+**Total Confirmed Infestations:** 44 (43 in Texas, 1 in New Mexico)
+**Page Last Updated:** August 1, 2026 at 7:30 p.m. CDT
+
+## Confirmed Cases by County
+
+| County          | Animal/Species          | Confirmation Date               |
+|-----------------|-------------------------|---------------------------------|
+| Pecos           | Sheep                   | June 31                         |
+| Brewster        | Cattle                  | (Recent, specific date not provided) |
+| Sutton          | Goats                   | (Recent, specific date not provided) |
+| Schleicher      | Sheep                   | (Recent, specific date not provided) |
+| Starr (western) | Calf                    | (Recent, specific date not provided) |
+| Jim Hogg        | (Species not specified) | (Earlier detection)             |
+
+## Quarantine/Movement Restriction Zones
+
+The article notes that "movement restrictions now cover parts of 22 Texas
+counties, stretching from the Rio Grande Valley through West Texas and the Hill
+Country," but does not list all 22 counties individually by name.
+
+The specific counties mentioned as having quarantine restrictions include parts
+of Starr and Jim Hogg counties in the Rio Grande Valley region.</code></pre>
+<p><strong>Two defects in the source, neither of which was cleaned up silently.</strong></p>
+<ul style="margin:8px 0 8px 22px;"><li style="margin-bottom:5px;"><strong>"June 31" is not a date.</strong> June has thirty days. It is quoted into this log as it was returned, and it was NOT written into the register as a case date — the register records Pecos as a named county at the 1 August slice with no date, because a date that cannot exist must not be repaired by guessing which of the two plausible corrections was meant.</li><li style="margin-bottom:5px;"><strong>"Parts of 22 Texas counties" with no list.</strong> A count without members. The register stores <code>infested_zone: null</code> and <code>infested_zone_count: 22</code> for this slice, and the map panel for 1 August prints <strong>"zone list not published"</strong> rather than drawing an empty zone layer.</li></ul>
+<h4 style="margin:22px 0 8px;padding:0 0 4px;font-size:12pt;color:#500000;border-bottom:1px solid #DDD8D4;"><strong>Call 5 — the 26 August snapshot, which gave the full zone list</strong></h4>
+<pre style="background:#F7F5F4;border-left:5px solid #500000;padding:10px 14px;margin:12px 0;overflow-x:auto;font-size:11pt;line-height:1.5;"><code>WebFetch
+  url:    https://www.kedt.org/2026-08-26/47-confirmed-new-world-screwworm-
+          infestations-texas-tracker-and-what-you-need-to-know
+  prompt: List EVERY Texas county named in this tracker in connection with New
+          World screwworm. For each, give the confirmation date, species, and
+          whether it is described as a confirmed case, an infested zone, or a
+          quarantine area. Also give the total confirmed infestation count, how
+          many are active vs resolved, and the date this article was published or
+          last updated. Reproduce any county list verbatim.</code></pre>
+<p><strong>Returned, in full:</strong></p>
+<pre style="background:#F7F5F4;border-left:5px solid #500000;padding:10px 14px;margin:12px 0;overflow-x:auto;font-size:11pt;line-height:1.5;"><code># New World Screwworm: Texas County Information
+
+**Total Confirmed Infestations:** 47 (46 in Texas, 1 in New Mexico)
+**Publication/Update Date:** August 26, 2026 at 9:50 PM CDT
+
+## Confirmed Cases with Specific Dates and Species
+
+The article names only three specific confirmed cases:
+
+1. **Val Verde County** – August 25, 2026 – Goat
+2. **Val Verde County** – August 16, 2026 – Sheep
+3. **Terrell County** – August 5, 2026 – Sheep
+
+## Movement Restriction Zones (23 Counties)
+
+The document states: "Movement restrictions remain in effect in designated
+infested zones within parts of 23 Texas counties: Bandera, Brewster, Coke,
+Crockett, Edwards, Gillespie, Jim Hogg, Kerr, Kimble, La Salle, Medina, Pecos,
+Presidio, Schleicher, Starr, Sutton, Terrell, Tom Green, Uvalde, Val Verde,
+Webb, Zapata and Zavala."
+
+## Active vs. Resolved Cases
+
+The article does not specify how many cases are active versus resolved.
+
+## Dashboard Reference
+
+An interactive tracker is embedded but not detailed within the article text
+itself.</code></pre>
+<p><strong>This is the call that made the whole thing possible</strong>, and it also fixed the number that mattered most: <strong>47 detections, 23 nameable zone counties, 13 nameable case counties.</strong></p>
+<hr aria-hidden="true" style="border:0;border-top:2px solid #EAEAEA;margin:22px 0;" />
+<h3 style="border-left:8pt solid #500000;background:#EAEAEA;padding:5px 6px;text-align:left;margin:18px 0 8px;font-size:13pt;"><strong><span style="color:#000000;">Turn 4 — reporting the data situation before building anything</span></strong></h3>
+<blockquote style="border-left:5px solid #B08A2E;background:#FBF8F0;margin:12px 0;padding:10px 16px;"><p style="margin:0;"><strong>ASSISTANT:</strong>  <strong>Step 1 done, and it found something better than I expected — and one thing that makes this a genuinely good teaching map.</strong>  <strong>County-level data does exist in published text, in pieces.</strong> Four sources, four dates:  - <strong>TAHC</strong> — nine confirmed detections across five named counties, each dated: Zavala (3 Jun, 5 Jun, 11 Jun), La Salle (7 Jun, 9 Jun), Gillespie (8 Jun), Edwards (9 Jun, 11 Jun), Tom Green (12 Jun). Plus the twelve-county quarantine, named. - <strong>Texas Standard, 1 Aug</strong> — 44 confirmed, adds Pecos, Brewster, Sutton, Schleicher, Starr, Jim Hogg. "Parts of 22 counties" under restriction, <strong>not listed</strong>. - <strong>KEDT, 26 Aug</strong> — 47 confirmed, and it lists all <strong>23 infested-zone counties verbatim</strong>: Bandera, Brewster, Coke, Crockett, Edwards, Gillespie, Jim Hogg, Kerr, Kimble, La Salle, Medina, Pecos, Presidio, Schleicher, Starr, Sutton, Terrell, Tom Green, Uvalde, Val Verde, Webb, Zapata, Zavala. Named cases: Val Verde (16 and 25 Aug), Terrell (5 Aug). - <strong>APHIS</strong> — confirms in its own words that the county-level case data exists <strong>only inside the embedded dashboard</strong>.  <strong>Here is the thing that makes this worth building.</strong> There are <strong>47 confirmed detections and roughly a dozen counties nameable from published text.</strong> The zones are fully enumerable; the cases are not. So the map cannot be a case choropleth — it would show a dozen counties and imply the other thirty-five detections happened nowhere.  <strong>So the map shows two layers that are different facts, and says which is which:</strong> the infested zones (complete, published, enumerable) and the counties with a <em>named</em> confirmed case (a subset, and known to be a subset). The gap between them is drawn, not hidden. <strong>That gap is the surveillance-map lesson from slide 9, in the client's own live data, on a map of your own state.</strong> I'd have paid for that example.  <strong>Also a conflict to report rather than resolve:</strong> TAHC's page names no released counties, while the 31 August APHIS zone releases cover La Salle, Webb, Gillespie, Kerr and Kimble. One of those is stale. Both go in the register.  <strong>Now: geometry.</strong> Natural Earth has no US counties. Fetching the standard FIPS-keyed county GeoJSON from the GitHub mirror and extracting Texas. Then the county facts go into the chronology register as dated slices with a source each, and the maps are generated from that — same rule as before, one fact in one place.</p></blockquote>
+<hr aria-hidden="true" style="border:0;border-top:2px solid #EAEAEA;margin:22px 0;" />
+<h3 style="border-left:8pt solid #500000;background:#EAEAEA;padding:5px 6px;text-align:left;margin:18px 0 8px;font-size:13pt;"><strong><span style="color:#000000;">Turn 5 — the geometry</span></strong></h3>
+<p>Natural Earth, which cartopy ships, has <strong>no US counties</strong>. The Census TIGER host is refused by the egress allowlist. <code>raw.githubusercontent.com</code> is permitted, and the standard FIPS-keyed county GeoJSON is mirrored there.</p>
+<pre style="background:#F7F5F4;border-left:5px solid #500000;padding:10px 14px;margin:12px 0;overflow-x:auto;font-size:11pt;line-height:1.5;"><code>import urllib.request, json, os, cartopy
+url = ("https://raw.githubusercontent.com/plotly/datasets/master/"
+       "geojson-counties-fips.json")
+with urllib.request.urlopen(url, timeout=120) as r:
+    gj = json.load(r)
+tx = [f for f in gj["features"] if f["properties"].get("STATE") == "48"]
+out = {"type": "FeatureCollection",
+       "features": [{"type": "Feature",
+                     "properties": {"NAME": f["properties"]["NAME"],
+                                    "FIPS": f["properties"].get("GEO_ID","").split("US")[-1]},
+                     "geometry": f["geometry"]} for f in tx]}
+d = os.path.join(cartopy.config["data_dir"], "extra")
+os.makedirs(d, exist_ok=True)
+json.dump(out, open(os.path.join(d, "tx_counties.geojson"), "w"))</code></pre>
+<p><strong>Returned:</strong></p>
+<pre style="background:#F7F5F4;border-left:5px solid #500000;padding:10px 14px;margin:12px 0;overflow-x:auto;font-size:11pt;line-height:1.5;"><code>fetching https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json
+features: 3221
+texas counties: 254
+wrote /…/.local/share/cartopy/extra/tx_counties.geojson 145055 bytes
+sample: ['Anderson', 'Andrews', 'Angelina', 'Aransas', 'Archer', 'Armstrong'] … ['Young', 'Zapata', 'Zavala']
+MISSING from geometry: none</code></pre>
+<p><strong>The last line is the step most likely to be skipped and the one that saves the most time.</strong> Before drawing anything, every county name the sources had produced was checked against the names in the geometry:</p>
+<pre style="background:#F7F5F4;border-left:5px solid #500000;padding:10px 14px;margin:12px 0;overflow-x:auto;font-size:11pt;line-height:1.5;"><code>want = ["Zavala","La Salle","Edwards","Gillespie","Tom Green","Coke","Kerr",
+        "Kimble","Sutton","Uvalde","Val Verde","Webb","Bandera","Brewster",
+        "Crockett","Jim Hogg","Medina","Pecos","Presidio","Schleicher","Starr",
+        "Terrell","Zapata"]
+missing = [w for w in want if w not in names]</code></pre>
+<p><code>none</code>. <strong>A join on text keys is the most common silent failure in this kind of work</strong> — "La Salle" against "LaSalle", "Tom Green" against "TomGreen", a trailing " County" on one side. Checking it before the map is drawn turns a wrong map into an error message. In this case the mirror's <code>NAME</code> field matched the sources' spelling exactly, which was luck, not design; the check is what converted luck into knowledge.</p>
+<hr aria-hidden="true" style="border:0;border-top:2px solid #EAEAEA;margin:22px 0;" />
+<h3 style="border-left:8pt solid #500000;background:#EAEAEA;padding:5px 6px;text-align:left;margin:18px 0 8px;font-size:13pt;"><strong><span style="color:#000000;">Turn 6 — the data into the register, before the picture</span></strong></h3>
+<p>The county facts were written into <code>content/projects/screwworm_chronology.yaml</code> as four dated slices, each with its source URL and retrieval date, under a header that states plainly what the block is not:</p>
+<blockquote style="border-left:5px solid #B08A2E;background:#FBF8F0;margin:12px 0;padding:10px 16px;"><p style="margin:0;"><strong>WHY THIS BLOCK EXISTS AND WHY IT IS NOT A CASE COUNT</strong>  Asked for a map of Texas counties with documented cases through time. The request is reasonable and the data to answer it exactly does not exist in public form. What exists is two different things, published by different people at different cadences:  <em> <strong>INFESTED ZONES</strong> are enumerable. Somebody publishes the list of counties under movement restriction, in text, and it is complete on the day it is published. </em> <strong>CONFIRMED CASES</strong> are counted but not located. The running total is published — 47 by late August — while the county of each case lives only in an embedded APHIS dashboard that publishes no county list and no export.  So on any given date the number of counties this file can NAME is far smaller than the number of detections that have occurred. <strong>That gap is the point of the map, not a defect in it.</strong> […] <code>named_cases</code> is therefore always a LOWER BOUND and is marked as one. Nothing in this block should be summed and reported as a case count.</p></blockquote>
+<p><strong>Verification output when the block was written:</strong></p>
+<pre style="background:#F7F5F4;border-left:5px solid #500000;padding:10px 14px;margin:12px 0;overflow-x:auto;font-size:11pt;line-height:1.5;"><code>2026-06-03  detections=  1  named_counties= 1  zone=0
+2026-06-12  detections=  9  named_counties= 5  zone=12
+2026-08-01  detections= 44  named_counties=11  zone=not published
+2026-08-26  detections= 47  named_counties=13  zone=23</code></pre>
+<p><strong>Read the two middle columns down the page.</strong> Detections go 1, 9, 44, 47. Nameable counties go 1, 5, 11, 13. <strong>The record of what happened and the record of where it happened are diverging</strong>, and by the last row 34 of 47 detections have no county in any public text.</p>
+<p>The block also carries a <code>what_a_map_of_this_may_not_say</code> list, written before the map existed. Quoted from the register, word for word, as a list rather than a block quotation so that it renders as one (an indented bullet list flattens into a paragraph beginning with a dash, which the accessibility gate refuses):</p>
+<ul style="margin:8px 0 8px 22px;"><li style="margin-bottom:5px;">That a county with no shading has no cases. It means no source published a county.</li><li style="margin-bottom:5px;">That the two layers are the same thing. A zone is a restriction on movement drawn around an area; a named case is one animal. They are published by different bodies for different purposes and they do not nest.</li><li style="margin-bottom:5px;">That any of this is at sub-county resolution. Every zone is described as covering PARTS of the counties named, and this file holds whole counties.</li></ul>
+<hr aria-hidden="true" style="border:0;border-top:2px solid #EAEAEA;margin:22px 0;" />
+<h3 style="border-left:8pt solid #500000;background:#EAEAEA;padding:5px 6px;text-align:left;margin:18px 0 8px;font-size:13pt;"><strong><span style="color:#000000;">Turn 7 — building the map, and what went wrong</span></strong></h3>
+<p>The figure is generated by <code>texas()</code> in <code>tools/slides/figs_w02.py</code>: four Albers equal-area panels, one per slice, gold for zone counties, maroon for counties with a named case, drawn from the register.</p>
+<h4 style="margin:22px 0 8px;padding:0 0 4px;font-size:12pt;color:#500000;border-bottom:1px solid #DDD8D4;"><strong>First render — the failure that a build cannot catch</strong></h4>
+<p>The four maps drew correctly and <strong>every panel caption was missing.</strong> The build reported success.</p>
+<p>The cause: the captions were written with the file's own text helper, which places text in <strong>data coordinates</strong>. On a projected map axes, data coordinates are meters in a conic projection, so <code>y = 1.075</code> put every caption a meter above the equator — far outside the visible extent. Nothing errored. <strong>A label off the edge of a map is not an error to matplotlib.</strong></p>
+<p>The fix, and the comment left in the code so the next person does not repeat it:</p>
+<pre style="background:#F7F5F4;border-left:5px solid #500000;padding:10px 14px;margin:12px 0;overflow-x:auto;font-size:11pt;line-height:1.5;"><code># Panel captions are FIGURE text. Written as axes text they were placed
+# in data coordinates on a projected axes and silently landed outside
+# the visible extent -- the panels rendered captionless and the build
+# said nothing, because a label off the edge of a map is not an error.</code></pre>
+<p><strong>This was caught by looking at the rendered image.</strong> It could not have been caught any other way, and it is the same lesson the project already carries as R41: <em>look at the rendered pages before saying a document is done.</em></p>
+<h4 style="margin:22px 0 8px;padding:0 0 4px;font-size:12pt;color:#500000;border-bottom:1px solid #DDD8D4;"><strong>Second render — a collision, fixed by moving the layout rather than the text</strong></h4>
+<p>The panel dates collided with the figure's subtitle. Panels moved down, subtitle up. Trivial, and recorded because it is the ordinary half of this work.</p>
+<hr aria-hidden="true" style="border:0;border-top:2px solid #EAEAEA;margin:22px 0;" />
+<h3 style="border-left:8pt solid #500000;background:#EAEAEA;padding:5px 6px;text-align:left;margin:18px 0 8px;font-size:13pt;"><strong><span style="color:#000000;">What the assistant refused to do, and why it matters most</span></strong></h3>
+<p><strong>A choropleth of confirmed cases per county was the obvious deliverable and it would have been wrong.</strong> Thirteen counties shaded, 241 blank, on a map captioned "documented cases" — and thirty-four real detections rendered as absence.</p>
+<p>That is precisely the error the <a href="lectures/W02.html" style="color:#500000;text-decoration:underline;">W02</a> deck spends a slide teaching: <strong>a detection map is a surveillance map.</strong> The deck that says so would have committed it in the same session, on the following slide, in the instructor's own state.</p>
+<p><strong>What was built instead:</strong> two layers, labeled as different kinds of fact, with the count of each printed under every panel, and a footer that says in bold what the white counties mean:</p>
+<blockquote style="border-left:5px solid #B08A2E;background:#FBF8F0;margin:12px 0;padding:10px 16px;"><p style="margin:0;">A county with no color does not mean no cases — it means no source published a county. At the last date, 34 of 47 detections have no county in any public text.</p></blockquote>
+<hr aria-hidden="true" style="border:0;border-top:2px solid #EAEAEA;margin:22px 0;" />
+<h3 style="border-left:8pt solid #500000;background:#EAEAEA;padding:5px 6px;text-align:left;margin:18px 0 8px;font-size:13pt;"><strong><span style="color:#000000;">The scorecard, against the instructor's own four criteria</span></strong></h3>
+<p>He named four: <strong>understand the job, find the data, build the map, present it.</strong></p>
+<table style="border-collapse:collapse;width:100%;margin:12px 0;"><caption style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;"><strong>The scorecard, against the instructor's own four criteria</strong></caption><thead><tr><th scope="col" style="background:#500000;color:#ffffff;padding:7px 9px;text-align:left;font-size:11pt;">Criterion</th><th scope="col" style="background:#500000;color:#ffffff;padding:7px 9px;text-align:left;font-size:11pt;">Result</th></tr></thead><tbody><tr><td style="padding:7px 9px;border-bottom:1px solid #DDD8D4;background:#ffffff;font-size:11pt;vertical-align:top;"><strong>Understand the job</strong></td><td style="padding:7px 9px;border-bottom:1px solid #DDD8D4;background:#ffffff;font-size:11pt;vertical-align:top;">Partly. The task was understood; <strong>the constraint that makes it interesting was not anticipated</strong> — the opening reply predicted the county data did not exist and it partly did. The prediction was stated out loud before being tested, which is what made it correctable in one step rather than three.</td></tr><tr><td style="padding:7px 9px;border-bottom:1px solid #DDD8D4;background:#F7F5F4;font-size:11pt;vertical-align:top;"><strong>Find the data</strong></td><td style="padding:7px 9px;border-bottom:1px solid #DDD8D4;background:#F7F5F4;font-size:11pt;vertical-align:top;">Yes, and better than expected — but <strong>only by fetching four sources rather than reasoning from one.</strong> No single source answers the question. The tracker republished at two dates is what made "across time" answerable, and that was found by search, not by knowing.</td></tr><tr><td style="padding:7px 9px;border-bottom:1px solid #DDD8D4;background:#ffffff;font-size:11pt;vertical-align:top;"><strong>Build the map</strong></td><td style="padding:7px 9px;border-bottom:1px solid #DDD8D4;background:#ffffff;font-size:11pt;vertical-align:top;">Yes. Geometry from a mirror because the canonical host is blocked; a name-join verified before drawing; one silent rendering failure caught by eye and not by any gate.</td></tr><tr><td style="padding:7px 9px;border-bottom:1px solid #DDD8D4;background:#F7F5F4;font-size:11pt;vertical-align:top;"><strong>Present it</strong></td><td style="padding:7px 9px;border-bottom:1px solid #DDD8D4;background:#F7F5F4;font-size:11pt;vertical-align:top;">The map presents the gap in the record as its subject, which is the honest reading of what the data supports.</td></tr></tbody></table>
+<p><strong>Two things a student should take from the failures rather than the successes.</strong></p>
+<ol style="margin:8px 0 8px 22px;"><li style="margin-bottom:6px;"><strong>The assistant's first instinct about the data was wrong, and saying so in advance is what made that cheap.</strong> An unstated assumption would have produced a map built on the register alone and nobody would have gone looking.</li><li style="margin-bottom:6px;"><strong>The map that was easiest to build was the one that would have lied.</strong> No tool, gate or check in this project would have stopped it. The only thing standing between the easy map and the honest one was somebody asking what the white counties meant.</li></ol>
+<hr aria-hidden="true" style="border:0;border-top:2px solid #EAEAEA;margin:22px 0;" />
+<h3 style="border-left:8pt solid #500000;background:#EAEAEA;padding:5px 6px;text-align:left;margin:18px 0 8px;font-size:13pt;"><strong><span style="color:#000000;">What is still not known, and would change the map</span></strong></h3>
+<ul style="margin:8px 0 8px 22px;"><li style="margin-bottom:5px;"><strong>The 34 unlocated detections.</strong> In the APHIS dashboard, which publishes no county list and no export. A student with browser access could transcribe them; that is a real, finishable component and it is worth marks.</li><li style="margin-bottom:5px;"><strong>Whether the zones were released.</strong> TAHC's page and the APHIS action reported by trade press disagree, and the register holds both.</li><li style="margin-bottom:5px;"><strong>Sub-county geography.</strong> Every zone covers <em>parts</em> of counties. Whole counties are drawn. The map is coarser than the fact it represents, and says so.</li></ul>
+</body>
+</html>

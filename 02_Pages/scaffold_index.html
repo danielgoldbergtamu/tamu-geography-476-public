@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GEOG 476 &#8212; traceability visualizations</title>
+<style>
+ :root { --ink:#1a1a1a; --muted:#6b6b6b; --surface:#fcfcfb; --grid:#e4e2e0; --mark:#9E3535; }
+ * { box-sizing:border-box; }
+ body { margin:0; padding:34px 20px 70px; background:var(--surface); color:var(--ink);
+   font:16px/1.55 Georgia,'Iowan Old Style','Times New Roman',serif; }
+ .wrap { max-width:1000px; margin:0 auto; }
+ h1 { font-size:28px; color:#500000; margin:0 0 6px; letter-spacing:-.01em; }
+ h2 { font-size:19px; color:#500000; margin:40px 0 4px; }
+ p.sub, p.note { color:var(--muted); font-size:14.5px; margin:4px 0 14px; max-width:78ch; }
+ p.note b, p.sub b { color:var(--ink); font-weight:400; }
+ .nums { display:flex; gap:26px; flex-wrap:wrap; margin:14px 0 4px; }
+ .nums div { font-size:13px; color:var(--muted); }
+ .nums b { display:block; font-size:25px; color:var(--ink); font-weight:400;
+   line-height:1.15; }
+ .cards { display:grid; gap:14px; margin-top:12px;
+   grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); }
+ .card { display:block; border:1px solid var(--grid); border-radius:9px; padding:14px 16px;
+   text-decoration:none; color:inherit; background:var(--surface); }
+ .card:hover { border-color:var(--mark); }
+ .card h3 { margin:0 0 4px; font-size:16.5px; font-weight:400; color:#500000; }
+ .card p { margin:0 0 5px; font-size:13.5px; color:var(--muted); }
+ .card p.d { color:var(--ink); }
+ .card p.g b { color:#2b5f2b; } .card p.h b { color:#7a2b2b; }
+ .card p.f { font-size:12px; color:var(--grid); margin:8px 0 0; }
+ .b { display:flex; align-items:center; gap:10px; font-size:13px; margin:3px 0; }
+ .b span { width:82px; color:var(--muted); }
+ .b i { height:13px; border-radius:2px; display:block; }
+ .b em { font-style:normal; color:var(--muted); font-size:12.5px; }
+ @media (prefers-color-scheme: dark) {
+  :root { --ink:#ececec; --muted:#a8a8a8; --surface:#16161a; --grid:#35353e;
+    --mark:#d98a8a; }
+  h1,h2 { color:#e3b7b7; }
+  .card p.g b { color:#8fc08f; } .card p.h b { color:#e0a0a0; }
+ }
+</style></head><body><div class="wrap">
+
+<h1>Traceability: what the course teaches, at what level, toward what</h1>
+<p class="sub">Every page here is generated from one file,
+<code>11_Project_Status/scaffold_graph.json</code>, so no two of them can disagree about
+what the course contains. <b>All 182 levels are proposals</b> read from the course's
+own words by <code>tools/bloom_evidence.py</code>, not yet confirmed by the instructor.</p>
+
+<div class="nums">
+  <div><b>182</b>items on the scale</div>
+  <div><b>145</b>in class</div>
+  <div><b>37</b>handed in</div>
+  <div><b>6</b>course outcomes</div>
+  <div><b>14</b>weeks</div>
+  <div><b>8</b>declared chains</div>
+</div>
+
+<h2>The pages</h2>
+<div class="cards"><a class="card" href="scaffold_items.html"><h3>Every activity and assignment</h3><p class="d">One square per item, then all 182 by name with filters for level, outcome and whether it is handed in.</p><p class="g"><b>Good for:</b> the only view with the actual items in it. Start here when someone asks &#8220;which ones?&#8221;</p><p class="h"><b>Hides:</b> the shape of the whole thing. 182 names is a list, not a picture.</p><p class="f">scaffold_items.html</p></a><a class="card" href="scaffold_views.html"><h3>Five views of the same scaffold</h3><p class="d">Outcome-by-week heatmap, the cumulative climb, a radar of the mix, what each week is made of, and the declared chains.</p><p class="g"><b>Good for:</b> the one to present. The heatmap holds all 6 outcomes and 14 weeks at once and shows where an outcome goes quiet.</p><p class="h"><b>Hides:</b> each panel hides something different, and each says so on the page.</p><p class="f">scaffold_views.html</p></a><a class="card" href="scaffold_pyramid.html"><h3>Every outcome as a pyramid</h3><p class="d">Per-outcome tiers with the conventional Bloom pyramid drawn behind them, and a flow from level to course outcome to degree outcome.</p><p class="g"><b>Good for:</b> the argument that this course is not pyramid-shaped, and the only view that reaches the college-level outcomes.</p><p class="h"><b>Hides:</b> which items. A tier is a width, not a list &#8212; that is what the items page is for.</p><p class="f">scaffold_pyramid.html</p></a><a class="card" href="scaffold.html"><h3>The scaffold chart</h3><p class="d">The original dot chart: session by level, with a small multiple per course outcome and per degree outcome.</p><p class="g"><b>Good for:</b> seeing every session in one row, and the per-outcome panels beside each other.</p><p class="h"><b>Hides:</b> magnitude. A dot is a session having something at that level, not how much.</p><p class="f">scaffold.html</p></a><a class="card" href="bloom_verbs.html"><h3>The master Bloom verb list</h3><p class="d">14 published lists from 12 independent offices, what they agree on, and the 39 verbs they contradict each other about.</p><p class="g"><b>Good for:</b> defending the levels. This is the evidence behind every number on the other pages.</p><p class="h"><b>Hides:</b> nothing about this course &#8212; it is the field's opinion, not ours.</p><p class="f">bloom_verbs.html</p></a></div>
+
+<h2>What the numbers currently say</h2>
+<p class="note">Evaluate 63 &#183; Apply 55 &#183; Create 30 &#183; Remember 13 &#183; Understand 11 &#183; Analyze 10. <b>The course is not pyramid-shaped</b> &#8212; the widest level is
+second from the top, and Analyze has fewer items than any other level, so the course moves
+from applying a method to judging a result with little in between where students take
+something apart. Whether that is a finding about the course or about the scorer depends on
+the levels being confirmed.</p>
+<div class="b"><span>Create</span><i style="width:47.6%;background:#5e2323"></i><em>30</em></div><div class="b"><span>Evaluate</span><i style="width:100.0%;background:#8a4747"></i><em>63</em></div><div class="b"><span>Analyze</span><i style="width:15.9%;background:#ab6e6e"></i><em>10</em></div><div class="b"><span>Apply</span><i style="width:87.3%;background:#c89b9b"></i><em>55</em></div><div class="b"><span>Understand</span><i style="width:17.5%;background:#dfc4c4"></i><em>11</em></div><div class="b"><span>Remember</span><i style="width:20.6%;background:#f2e9e9"></i><em>13</em></div>
+</div></body></html>

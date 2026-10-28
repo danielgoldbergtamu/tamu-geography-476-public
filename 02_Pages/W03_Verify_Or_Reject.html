@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Verify or reject — an AI-written project plan</title>
+<meta name="editing_roles" content="teachers"/>
+<meta name="workflow_state" content="active"/>
+<meta name="editor_type" content="rce"/>
+<style>html{-webkit-text-size-adjust:100%}body{margin:0 auto;padding:28px 32px 64px;max-width:900px;background:#ffffff;color:#2b2724;font:16px/1.65 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}img{max-width:100%;height:auto}table{width:100%}@media (max-width:640px){body{padding:18px 16px 48px}}</style>
+</head>
+<body>
+<h2 style="border-top:8pt solid #500000;background:#EAEAEA;padding:8px 6px 6px;text-align:center;margin:0 0 4px;font-size:16pt;"><span style="color:#000000;">Verify or reject — an AI-written project plan</span></h2><p style="margin:2px 0 0;text-align:center;font-size:11pt;color:#5A5A5A;"><a href="Course_Wiring_Matrix.html#week-03" style="color:#500000;text-decoration:underline;">Week 3</a>, in class, one screen between two of you. This page is the material and the instructions. If you missed</p><p>&nbsp;</p>
+<p><em>Week 3, in class, one screen between two of you. This page is the material and the instructions. If you missed the class, everything you need to do it on your own is here.</em></p>
+<p>Below is a project plan an AI produced when asked to plan the screwworm transmission component of this course's client project. <strong>It has not been edited.</strong></p>
+<h3 style="border-left:8pt solid #500000;background:#EAEAEA;padding:5px 6px;text-align:left;margin:18px 0 8px;font-size:13pt;"><strong><span style="color:#000000;">What you do</span></strong></h3>
+<ol style="margin:8px 0 8px 22px;"><li style="margin-bottom:6px;"><strong>Read it once, straight through.</strong> Do not stop. It will look reasonable — that is the exercise.</li><li style="margin-bottom:6px;"><strong>Read it again and mark every line you could not check</strong> against the brief, a real date, a real price, or a person who would know.</li><li style="margin-bottom:6px;"><strong>Agree on the worst line</strong> — the one you would refuse to put your name on.</li><li style="margin-bottom:6px;"><strong>Write one sentence:</strong> what is wrong with it, and how you would have caught it.</li></ol>
+<p><strong>A check is not "it sounds right" and it is not "it ran."</strong> Executing is not evidence.</p>
+<hr aria-hidden="true" style="border:0;border-top:2px solid #EAEAEA;margin:22px 0;" />
+<h3 style="border-left:8pt solid #500000;background:#EAEAEA;padding:5px 6px;text-align:left;margin:18px 0 8px;font-size:13pt;"><strong><span style="color:#000000;">Project plan: New World screwworm transmission pathway analysis</span></strong></h3>
+<p><strong>Prepared for:</strong> USDA · <strong>Duration:</strong> 14 weeks · <strong>Team:</strong> 5 analysts</p>
+<h4 style="margin:22px 0 8px;padding:0 0 4px;font-size:12pt;color:#500000;border-bottom:1px solid #DDD8D4;"><strong>Phase 1 — Data acquisition (Weeks 1–2)</strong></h4>
+<ol style="margin:8px 0 8px 22px;"><li style="margin-bottom:6px;">Download the <strong>USDA APHIS National Screwworm Surveillance Layer</strong> (updated daily, public REST endpoint) for all confirmed detections 2022–2026.</li><li style="margin-bottom:6px;">Acquire <strong>Mexican SENASICA cattle movement permits</strong> as a point dataset. Available through the SENASICA open data portal at no cost.</li><li style="margin-bottom:6px;">Obtain <strong>NAIP 4-band imagery at 0.6 m</strong> for the Texas border counties for winter 2026.</li><li style="margin-bottom:6px;">Pull <strong>daily minimum temperature</strong> from PRISM at 800 m resolution.</li></ol>
+<p><em>Estimated cost: $0. All sources are open.</em></p>
+<h4 style="margin:22px 0 8px;padding:0 0 4px;font-size:12pt;color:#500000;border-bottom:1px solid #DDD8D4;"><strong>Phase 2 — Environmental suitability (Weeks 3–5)</strong></h4>
+<ol style="margin:8px 0 8px 22px;"><li style="margin-bottom:6px;">Reproject all layers to <strong>NAD83 Texas Statewide Mapping System</strong> for consistency.</li><li style="margin-bottom:6px;">Build a MaxEnt suitability surface using the detection points as presence records and temperature, humidity and land cover as predictors.</li><li style="margin-bottom:6px;">Validate with a <strong>70/30 train–test split</strong>. Target AUC &gt; 0.85.</li></ol>
+<h4 style="margin:22px 0 8px;padding:0 0 4px;font-size:12pt;color:#500000;border-bottom:1px solid #DDD8D4;"><strong>Phase 3 — Movement pathway modeling (Weeks 6–9)</strong></h4>
+<ol style="margin:8px 0 8px 22px;"><li style="margin-bottom:6px;">Construct a least-cost path network between Mexican origin municipalities and Texas destination markets, weighting by road class and suitability.</li><li style="margin-bottom:6px;">Calibrate travel cost using <strong>average cattle transport speed of 45 km/h</strong>.</li><li style="margin-bottom:6px;">Cross-reference against the <strong>USDA approved cattle market list</strong> to identify likely entry points.</li></ol>
+<h4 style="margin:22px 0 8px;padding:0 0 4px;font-size:12pt;color:#500000;border-bottom:1px solid #DDD8D4;"><strong>Phase 4 — Synthesis and delivery (Weeks 10–14)</strong></h4>
+<ol style="margin:8px 0 8px 22px;"><li style="margin-bottom:6px;">Integrate all five analyst components into a single geodatabase.</li><li style="margin-bottom:6px;">Produce a risk surface, a set of pathway maps, and a technical report.</li><li style="margin-bottom:6px;">Deliver to the client in <a href="Course_Wiring_Matrix.html#week-14" style="color:#500000;text-decoration:underline;">Week 14</a>.</li></ol>
+<h4 style="margin:22px 0 8px;padding:0 0 4px;font-size:12pt;color:#500000;border-bottom:1px solid #DDD8D4;"><strong>Risks</strong></h4>
+<ul style="margin:8px 0 8px 22px;"><li style="margin-bottom:5px;">Data may be delayed.</li><li style="margin-bottom:5px;">Team members may fall behind schedule.</li><li style="margin-bottom:5px;">Analysis may be more complex than anticipated.</li><li style="margin-bottom:5px;">Stakeholder requirements may change.</li></ul>
+<hr aria-hidden="true" style="border:0;border-top:2px solid #EAEAEA;margin:22px 0;" />
+<h3 style="border-left:8pt solid #500000;background:#EAEAEA;padding:5px 6px;text-align:left;margin:18px 0 8px;font-size:13pt;"><strong><span style="color:#000000;">What you hand in</span></strong></h3>
+<p><strong>One sentence</strong>, in <strong>Attendance 1</strong> (this module, text entry): the line you would refuse to put your name on, and how you would have caught it.</p>
+<p><em>Keep your notes. Thursday you write an <a href="AI_Method_Log.html" style="color:#500000;text-decoration:underline;">AI Method Log</a> entry for real, and this is exactly what one records.</em></p>
+</body>
+</html>

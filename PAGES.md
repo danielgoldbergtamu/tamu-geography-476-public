@@ -7,7 +7,7 @@
 | --- | --- |
 | Syllabus | [`01_Syllabus/Syllabus_F26.html`](01_Syllabus/Syllabus_F26.html) |
 
-## Pages (53)
+## Pages (75)
 
 | Page | File |
 | --- | --- |
@@ -22,11 +22,28 @@
 | About the GIS + AI Knowledge Check | [`02_Pages/About_The_GIS_AI_Knowledge_Check.html`](02_Pages/About_The_GIS_AI_Knowledge_Check.html) |
 | Course Learning Outcomes | [`02_Pages/Course_Learning_Outcomes.html`](02_Pages/Course_Learning_Outcomes.html) |
 | Course Wiring and Alignment Matrix | [`02_Pages/Course_Wiring_Matrix.html`](02_Pages/Course_Wiring_Matrix.html) |
+| Texas counties with documented screwworm cases, across time — the full record | [`02_Pages/GeoAI_WGE_001_Log.html`](02_Pages/GeoAI_WGE_001_Log.html) |
+| Texas counties with documented screwworm cases, across time | [`02_Pages/GeoAI_WGE_001_Summary.html`](02_Pages/GeoAI_WGE_001_Summary.html) |
+| Every map has to be readable by everyone who has to read it — the full record | [`02_Pages/GeoAI_WGE_002_Log.html`](02_Pages/GeoAI_WGE_002_Log.html) |
+| Every map has to be readable by everyone who has to read it | [`02_Pages/GeoAI_WGE_002_Summary.html`](02_Pages/GeoAI_WGE_002_Summary.html) |
+| Two cities, four Landsat frames, and a network that would not hand them over — the full record | [`02_Pages/GeoAI_WGE_003_Log.html`](02_Pages/GeoAI_WGE_003_Log.html) |
+| Two cities, four Landsat frames, and a network that would not hand them over | [`02_Pages/GeoAI_WGE_003_Summary.html`](02_Pages/GeoAI_WGE_003_Summary.html) |
+| Four maps, two of which had no coordinates on them at all — the full record | [`02_Pages/GeoAI_WGE_004_Log.html`](02_Pages/GeoAI_WGE_004_Log.html) |
+| Four maps, two of which had no coordinates on them at all | [`02_Pages/GeoAI_WGE_004_Summary.html`](02_Pages/GeoAI_WGE_004_Summary.html) |
+| A crossing model, a first pass that failed usefully, and a test it could not game — the full record | [`02_Pages/GeoAI_WGE_006_Log.html`](02_Pages/GeoAI_WGE_006_Log.html) |
+| A crossing model, a first pass that failed usefully, and a test it could not game | [`02_Pages/GeoAI_WGE_006_Summary.html`](02_Pages/GeoAI_WGE_006_Summary.html) |
+| One question, three answers five hundred miles apart — the full record | [`02_Pages/GeoAI_WGE_007_Log.html`](02_Pages/GeoAI_WGE_007_Log.html) |
+| One question, three answers five hundred miles apart | [`02_Pages/GeoAI_WGE_007_Summary.html`](02_Pages/GeoAI_WGE_007_Summary.html) |
+| A register of the legal system is not a map of the animals — the full record | [`02_Pages/GeoAI_WGE_008_Log.html`](02_Pages/GeoAI_WGE_008_Log.html) |
+| A register of the legal system is not a map of the animals | [`02_Pages/GeoAI_WGE_008_Summary.html`](02_Pages/GeoAI_WGE_008_Summary.html) |
+| The null result that changed the advice — the full record | [`02_Pages/GeoAI_WGE_009_Log.html`](02_Pages/GeoAI_WGE_009_Log.html) |
+| The null result that changed the advice | [`02_Pages/GeoAI_WGE_009_Summary.html`](02_Pages/GeoAI_WGE_009_Summary.html) |
+| The escape hatch the last log left itself, and closing it — the full record | [`02_Pages/GeoAI_WGE_010_Log.html`](02_Pages/GeoAI_WGE_010_Log.html) |
+| The escape hatch the last log left itself, and closing it | [`02_Pages/GeoAI_WGE_010_Summary.html`](02_Pages/GeoAI_WGE_010_Summary.html) |
 | GEOG 476 - GIS Practicum | [`02_Pages/Home_Page.html`](02_Pages/Home_Page.html) |
 | How Projects Are Organized | [`02_Pages/How_Projects_Are_Organized.html`](02_Pages/How_Projects_Are_Organized.html) |
 | The Project Manager role | [`02_Pages/Project_Manager.html`](02_Pages/Project_Manager.html) |
 | Project: Urbanization Rates in African Cities | [`02_Pages/Project_NGA_African_Urbanization.html`](02_Pages/Project_NGA_African_Urbanization.html) |
-| Project: New World Screwworm Transmission Pathways | [`02_Pages/Project_USDA_NGA_Screwworm.html`](02_Pages/Project_USDA_NGA_Screwworm.html) |
 | The Rejection Drill | [`02_Pages/Rejection_Drill.html`](02_Pages/Rejection_Drill.html) |
 | GEOG 476 — Fall 2026 schedule | [`02_Pages/Schedule_F26.html`](02_Pages/Schedule_F26.html) |
 | Student Opportunities | [`02_Pages/Student_Opportunities.html`](02_Pages/Student_Opportunities.html) |
@@ -35,22 +52,28 @@
 | GIS + AI Knowledge Check — Pre | [`02_Pages/Survey_AI_Practice_Pre.html`](02_Pages/Survey_AI_Practice_Pre.html) |
 | Using TAMU AI from your own computer | [`02_Pages/TAMU_AI_From_Your_Computer.html`](02_Pages/TAMU_AI_From_Your_Computer.html) |
 | How to talk to one of these | [`02_Pages/Talking_To_An_Agent.html`](02_Pages/Talking_To_An_Agent.html) |
+| Verify or reject — an AI-written project plan | [`02_Pages/W03_Verify_Or_Reject.html`](02_Pages/W03_Verify_Or_Reject.html) |
 | What Is Due, and What You Hand In | [`02_Pages/What_Is_Due.html`](02_Pages/What_Is_Due.html) |
-| What the Client Actually Asked | [`02_Pages/What_The_Client_Actually_Asked.html`](02_Pages/What_The_Client_Actually_Asked.html) |
+| When a georeferenced map looks wrong | [`02_Pages/When_A_Georeferenced_Map_Looks_Wrong.html`](02_Pages/When_A_Georeferenced_Map_Looks_Wrong.html) |
+| GEOG 476 &#8212; the master Bloom verb list | [`02_Pages/bloom_verbs.html`](02_Pages/bloom_verbs.html) |
 | W01 — Course Intro, the Client Projects, the Syllabus, and Using AI on the Work | [`02_Pages/lectures/W01.html`](02_Pages/lectures/W01.html) |
 | W02 — The Client Projects | [`02_Pages/lectures/W02.html`](02_Pages/lectures/W02.html) |
-| W03 — Teams Announced · Project Management, Budgeting, and Data Standards | [`02_Pages/lectures/W03.html`](02_Pages/lectures/W03.html) |
+| W03 — Ranked Preferences Collected · Project Management, Budgeting, and Data Standards | [`02_Pages/lectures/W03.html`](02_Pages/lectures/W03.html) |
 | W04 — Professional Certifications | [`02_Pages/lectures/W04.html`](02_Pages/lectures/W04.html) |
 | W05 — Professional and Technical Writing | [`02_Pages/lectures/W05.html`](02_Pages/lectures/W05.html) |
 | W06 — Ethics | [`02_Pages/lectures/W06.html`](02_Pages/lectures/W06.html) |
 | W07 — Resumes | [`02_Pages/lectures/W07.html`](02_Pages/lectures/W07.html) |
 | W08 — Portfolios | [`02_Pages/lectures/W08.html`](02_Pages/lectures/W08.html) |
 | W09 — Professional Presentations | [`02_Pages/lectures/W09.html`](02_Pages/lectures/W09.html) |
-| W10 — Professional Posters | [`02_Pages/lectures/W10.html`](02_Pages/lectures/W10.html) |
 | W11 — Technical Presentations | [`02_Pages/lectures/W11.html`](02_Pages/lectures/W11.html) |
 | W12 — Writing for Decision-Makers — Leading with the Answer | [`02_Pages/lectures/W12.html`](02_Pages/lectures/W12.html) |
 | W13 — GIS Day — Presentations | [`02_Pages/lectures/W13.html`](02_Pages/lectures/W13.html) |
 | W15 — Project Presentations | [`02_Pages/lectures/W15.html`](02_Pages/lectures/W15.html) |
+| GEOG 476 — how the course scaffolds | [`02_Pages/scaffold.html`](02_Pages/scaffold.html) |
+| GEOG 476 &#8212; traceability visualizations | [`02_Pages/scaffold_index.html`](02_Pages/scaffold_index.html) |
+| GEOG 476 &#8212; every activity and assignment | [`02_Pages/scaffold_items.html`](02_Pages/scaffold_items.html) |
+| GEOG 476 &#8212; every outcome as a pyramid | [`02_Pages/scaffold_pyramid.html`](02_Pages/scaffold_pyramid.html) |
+| GEOG 476 &#8212; five views of the scaffold | [`02_Pages/scaffold_views.html`](02_Pages/scaffold_views.html) |
 | S00 — Getting Set Up with AI | [`02_Pages/studios/S00.html`](02_Pages/studios/S00.html) |
 | S01 — Project Selection & Decomposition | [`02_Pages/studios/S01.html`](02_Pages/studios/S01.html) |
 | S02 — Component Claim & Interface Contract | [`02_Pages/studios/S02.html`](02_Pages/studios/S02.html) |
@@ -58,8 +81,7 @@
 | S04 — Pilot Analysis | [`02_Pages/studios/S04.html`](02_Pages/studios/S04.html) |
 | S05 — Reproducible Workflow | [`02_Pages/studios/S05.html`](02_Pages/studios/S05.html) |
 | S06 — Scaling & First Integration | [`02_Pages/studios/S06.html`](02_Pages/studios/S06.html) |
-| S07 — Validation & Quality Assurance | [`02_Pages/studios/S07.html`](02_Pages/studios/S07.html) |
-| S08 — Interpretation & Team Synthesis | [`02_Pages/studios/S08.html`](02_Pages/studios/S08.html) |
+| S07 — Portfolio Build on GitHub Pages | [`02_Pages/studios/S07.html`](02_Pages/studios/S07.html) |
 | S09 — Cartographic Design | [`02_Pages/studios/S09.html`](02_Pages/studios/S09.html) |
 | S10 — Poster Architecture | [`02_Pages/studios/S10.html`](02_Pages/studios/S10.html) |
 | S11 — Dry Run & Hostile Question and Answer | [`02_Pages/studios/S11.html`](02_Pages/studios/S11.html) |
@@ -70,7 +92,7 @@
 | Page | File |
 | --- | --- |
 | AI Review Log — Practice | [`03_Assignments/AI_Review_Log_Practice.html`](03_Assignments/AI_Review_Log_Practice.html) |
-| Attendance 1 | [`03_Assignments/Attendance_1.html`](03_Assignments/Attendance_1.html) |
+| Attendance 1 — W03, your ranked three and one rejection | [`03_Assignments/Attendance_1_—_W03,_Your_Ranked_Three_And_One_Rejection.html`](03_Assignments/Attendance_1_—_W03,_Your_Ranked_Three_And_One_Rejection.html) |
 | Attendance 2 | [`03_Assignments/Attendance_2.html`](03_Assignments/Attendance_2.html) |
 | Attendance 3 | [`03_Assignments/Attendance_3.html`](03_Assignments/Attendance_3.html) |
 | Attendance 4 | [`03_Assignments/Attendance_4.html`](03_Assignments/Attendance_4.html) |

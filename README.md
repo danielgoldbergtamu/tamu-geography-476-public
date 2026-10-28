@@ -15,7 +15,7 @@ rest.
 
 ## What this is
 
-**92 pages**, in four folders: the syllabus, 53 reference and session pages, 37 assignments and 1 rubric page.
+**114 pages**, in four folders: the syllabus, 75 reference and session pages, 37 assignments and 1 rubric page.
 
 Every page is standalone HTML with its styling inline. There is no build step, no
 JavaScript, and no images — open any file in a browser, or paste its source into a
@@ -71,6 +71,12 @@ documents argue and why they are assigned.
 
 **Two embedded slide decks are absent** for the same practical reason: they
 are hosted on a university Google Drive that is not public.
+
+**Two pages are held back pending client review.** They carry quotations from
+a client meeting, and the agreement in that meeting was that material is sent
+for expert approval before it is published. They are live for the class in
+Canvas; they are not published here until the client's communications office
+has read them.
 
 ## License
 
