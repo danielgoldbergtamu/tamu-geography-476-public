@@ -1,0 +1,407 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Poster Attention Check</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
+<style>
+/* Layout: a work table. Poster on the left at full width it can get, the reading order and checks in a narrow rail on the right; stacks on a phone. */
+:root{
+  --bg:#F2F4F3; --panel:#FFFFFF; --fg:#16201F; --muted:#566563; --line:#D2D9D7;
+  --accent:#0A6B66; --accent-ink:#FFFFFF; --mark:#C2410C; --chip:#E4EBE9;
+  --display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1514; --panel:#172120; --fg:#E5ECEA; --muted:#93A4A1; --line:#2B3735;
+  --accent:#4CC0B6; --accent-ink:#0F1514; --mark:#FF8A4C; --chip:#22302E; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1514; --panel:#172120; --fg:#E5ECEA; --muted:#93A4A1; --line:#2B3735;
+  --accent:#4CC0B6; --accent-ink:#0F1514; --mark:#FF8A4C; --chip:#22302E; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px}
+.wrap{max-width:1360px;margin:0 auto;display:grid;gap:18px}
+header{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px;border-bottom:2px solid var(--fg);padding-bottom:10px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(30px,4vw,44px);line-height:1;margin:0;letter-spacing:.01em;text-wrap:balance}
+.kicker{font-family:var(--display);font-weight:600;letter-spacing:.12em;text-transform:uppercase;font-size:13px;color:var(--accent)}
+.lede{margin:4px 0 0;color:var(--muted);max-width:62ch}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+button,.file{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:6px;padding:7px 12px;cursor:pointer}
+button:hover,.file:hover{border-color:var(--accent)}
+button:focus-visible,.file:focus-within{outline:3px solid var(--accent);outline-offset:2px}
+.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:700}
+button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.file input{position:absolute;width:1px;height:1px;opacity:0}
+.ctl{display:inline-flex;align-items:center;gap:4px;position:relative}
+.help{position:relative;display:inline-block}
+.help summary{list-style:none;cursor:pointer;width:24px;height:24px;border-radius:50%;border:1px solid var(--accent);color:var(--accent);background:var(--panel);display:grid;place-items:center;font-weight:700;font-size:13px}
+.help summary::-webkit-details-marker{display:none}
+.help[open] summary{background:var(--accent);color:var(--accent-ink)}
+.help summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.help .pop{position:absolute;z-index:20;top:30px;left:-120px;width:min(300px,80vw);background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:13px;line-height:1.45;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+.main{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px;align-items:start}
+@media (max-width:900px){.main{grid-template-columns:1fr}}
+.stagebox{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px;display:grid;gap:10px;min-width:0}
+.tabs{display:flex;flex-wrap:wrap;gap:6px}
+.tabs button{font-size:13px;padding:5px 10px}
+.vlabel{font-family:var(--display);font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-size:13px;color:var(--accent);align-self:center;margin-right:4px}
+.visitors button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.stage{position:relative;display:grid;place-items:center;min-height:240px;background:var(--chip);border-radius:6px;overflow:hidden}
+.stage.drop{outline:3px dashed var(--accent);outline-offset:-6px}
+#view{max-width:100%;height:auto;display:block;touch-action:none}
+#view.drawing{cursor:crosshair}
+.hint{font-size:13px;color:var(--muted);margin:0}
+.rail{display:grid;gap:14px;min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px}
+.card h2{font-family:var(--display);font-weight:600;font-size:20px;margin:0 0 8px;letter-spacing:.02em}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat{display:grid;gap:2px}
+.stat b{font-family:var(--display);font-size:28px;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-size:12px;color:var(--muted);line-height:1.3}
+ol.order{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+ol.order li{display:grid;grid-template-columns:28px 1fr;gap:8px;align-items:start}
+.num{width:26px;height:26px;border-radius:50%;background:var(--fg);color:var(--bg);display:grid;place-items:center;font-weight:700;font-size:14px}
+.tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+ul.checks{margin:0;padding-left:18px;display:grid;gap:6px}
+.note{font-size:13px;color:var(--muted)}
+.status{font-size:13px;color:var(--mark);min-height:1.2em;margin:0}
+.legend{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+.ramp{flex:1;height:10px;border-radius:5px;background:linear-gradient(90deg,#1b2a6b,#1f8fb3,#7fd36b,#f7d43a,#e8541e,#a3101b)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <div class="kicker">GEOG 476 · Poster studio</div>
+      <h1>Poster Attention Check</h1>
+      <p class="lede">Upload your poster, draw a box around each map, legend, picture and block of text, and see where a visitor's eyes are likely to go first. Then check it in grayscale, for color-blind readers, and from six feet away.</p>
+    </div>
+    <div class="controls">
+      <span class="ctl"><label class="file" for="file">Upload poster (PNG, JPG or PDF)<input id="file" type="file" accept="image/*,application/pdf"></label><details class="help"><summary aria-label="What does Upload poster do?">?</summary><div class="pop">Export your poster from PowerPoint or Google Slides as a PNG (best) or a PDF, then choose the file here. Only the first page of a PDF is used. The poster stays on your computer; nothing is uploaded to a server.</div></details></span>
+      <span class="ctl"><button class="mk" data-kind="map" aria-pressed="false">Mark a map</button><details class="help"><summary aria-label="What does Mark a map do?">?</summary><div class="pop">Click, then drag a box around each map on your poster, including small inset maps. The page cannot recognize a map by itself. Marking it tells the page where your maps are, so it gives them the attention a geographer gives a map. Click the button again to stop drawing.</div></details></span>
+      <span class="ctl"><button class="mk" data-kind="legend" aria-pressed="false">Mark a legend</button><details class="help"><summary aria-label="What does Mark a legend do?">?</summary><div class="pop">Click, then drag a box around each legend or map key. Someone with GIS basics and a GIS expert check the legend to learn what the colors mean, so the visitor views use these boxes.</div></details></span>
+      <span class="ctl"><button class="mk" data-kind="picture" aria-pressed="false">Mark a picture</button><details class="help"><summary aria-label="What does Mark a picture do?">?</summary><div class="pop">Click, then drag a box around each photo, drawing, chart, logo or icon. A newcomer who knows no geography looks at these first.</div></details></span>
+      <span class="ctl"><button class="mk" data-kind="text" aria-pressed="false">Mark text</button><details class="help"><summary aria-label="What does Mark text do?">?</summary><div class="pop">Click, then drag a box around each block of text: introduction, data and method, results, conclusions and references. A GIS expert reads the method and results text to decide whether to trust the map. Do not box the title; the page finds big type near the top on its own.</div></details></span>
+      <span class="ctl"><button id="clearBtn">Clear boxes</button><details class="help"><summary aria-label="What does Clear boxes do?">?</summary><div class="pop">Removes every box you drew so you can start over. It does not remove your poster.</div></details></span>
+      <button id="sampleBtn">Load the example</button>
+    </div>
+  </header>
+
+  <div class="main">
+    <section class="stagebox" aria-label="Poster view">
+      <div class="tabs visitors" role="group" aria-label="Visitor">
+        <span class="vlabel">See it as</span>
+        <button data-visitor="all" aria-pressed="true">Everyone</button>
+        <button data-visitor="newcomer" aria-pressed="false">Newcomer</button>
+        <button data-visitor="gis" aria-pressed="false">GIS basics</button>
+        <button data-visitor="expert" aria-pressed="false">GIS expert</button>
+        <details class="help"><summary aria-label="What does the visitor buttons do?">?</summary><div class="pop"><b>Everyone</b>: the general attention model. <b>Newcomer</b>: knows no geography; reads the title, looks at pictures and bright color, skips legends and methods. <b>GIS basics</b>: has taken a GIS course; goes to the map first, then the legend, scale and title. <b>GIS expert</b>: a GIS professional; reads the map, legend, method and results, and asks whether to trust the map. Mark your maps, legends, pictures and text first, or the visitor views have little to go on.</div></details>
+      </div>
+      <p class="hint" id="vhint">Everyone: the general attention model. Pick a visitor to see how a newcomer, someone with GIS basics, or a GIS expert reads the same poster.</p>
+      <div class="tabs" role="group" aria-label="View">
+        <button data-view="attention" aria-pressed="true">Attention</button>
+        <button data-view="original" aria-pressed="false">Original</button>
+        <button data-view="gray" aria-pressed="false">Grayscale</button>
+        <button data-view="deutan" aria-pressed="false">Red-green (deuteranopia)</button>
+        <button data-view="protan" aria-pressed="false">Red-green (protanopia)</button>
+        <button data-view="tritan" aria-pressed="false">Blue-yellow (tritanopia)</button>
+        <button data-view="far" aria-pressed="false">From six feet</button>
+        <details class="help"><summary aria-label="What does the view buttons do?">?</summary><div class="pop"><b>Attention</b>: the heatmap. Red is looked at longest; the numbers are the likely reading order. <b>Original</b>: your poster with your boxes. <b>Grayscale</b>: a black-and-white printer or projector. <b>Red-green</b> and <b>Blue-yellow</b>: how a reader with that kind of color blindness sees it; about 1 in 12 men has red-green color blindness. <b>From six feet</b>: roughly what reads from across the aisle at GIS Day.</div></details>
+      </div>
+      <div class="stage" id="stage"><canvas id="view" width="1200" height="900" aria-label="Your poster with the selected view"></canvas></div>
+      <p class="status" id="status" role="status"></p>
+      <div class="legend" id="legend"><span>Glanced past</span><div class="ramp"></div><span>Looked at longest</span></div>
+      <p class="hint" id="hint">Showing the example poster, which is made up for this page. Upload yours to replace it. Drop a file onto the poster works too. To save the result, right-click the poster and choose "Save image as", or take a screenshot.</p>
+    </section>
+
+    <aside class="rail">
+      <div class="card">
+        <h2>Where the attention goes</h2>
+        <div class="stats">
+          <div class="stat"><b id="sMap">–</b><span>of attention on your maps</span></div>
+          <div class="stat"><b id="sTop">–</b><span>on the top band (title)</span></div>
+          <div class="stat"><b id="sQuiet">–</b><span>of the poster barely looked at</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Likely reading order</h2>
+        <ol class="order" id="order"></ol>
+      </div>
+      <div class="card">
+        <h2>Check your poster</h2>
+        <ul class="checks">
+          <li>Is your map number 1 or 2? If not, make it bigger or give it more contrast.</li>
+          <li>Switch between the three visitors. Does the newcomer find your finding? Does the expert find your method and legend?</li>
+          <li>Does the title get looked at? It should be readable from six feet.</li>
+          <li>Is something unimportant pulling eyes, like a logo, a photo or a bright color block?</li>
+          <li>In grayscale and the color-blind views, can you still tell the map classes apart?</li>
+          <li>In the six-foot view, can you still read the title and your main finding?</li>
+        </ul>
+      </div>
+      <p class="note">This predicts attention from contrast, size, position and the boxes you mark. The visitor views use the same weights as the three kinds of visitor in the posters lecture. It is a model, not real eye tracking. Where you disagree with it, be ready to say why.</p>
+    </aside>
+  </div>
+</div>
+
+<script>
+(function(){
+const view=document.getElementById('view'), vctx=view.getContext('2d');
+const status=document.getElementById('status'), hint=document.getElementById('hint');
+let src=null;            // canvas holding the poster at display resolution
+let boxes=[];            // normalized [x0,y0,x1,y1]
+let mode='attention', drawKind=null, drag=null, visitor='all';
+const maps=()=>boxes.filter(b=>b[4]==='map');
+const KCOL={map:null,legend:'#2563EB',picture:'#9333EA',text:'#6B7280'};
+const VW={newcomer:{contrast:.55,picture:.45,map:.15,legend:0,text:0},gis:{contrast:.30,picture:.05,map:.55,legend:.30,text:.05},expert:{contrast:.15,picture:0,map:.45,legend:.40,text:.45}};
+let result=null;         // {heatCanvas, peaks, stats}
+
+// ---------- small numeric helpers ----------
+function norm(a){let mn=Infinity,mx=-Infinity;for(const v of a){if(v<mn)mn=v;if(v>mx)mx=v;}const d=mx-mn||1;const o=new Float32Array(a.length);for(let i=0;i<a.length;i++)o[i]=(a[i]-mn)/d;return o;}
+function boxPass(a,w,h,r,horiz){const o=new Float32Array(a.length);r=Math.max(1,Math.round(r));
+  if(horiz){for(let y=0;y<h;y++){let s=0,row=y*w;for(let x=-r;x<=r;x++)s+=a[row+Math.min(w-1,Math.max(0,x))];
+    for(let x=0;x<w;x++){o[row+x]=s/(2*r+1);s+=a[row+Math.min(w-1,x+r+1)]-a[row+Math.max(0,x-r)];}}}
+  else{for(let x=0;x<w;x++){let s=0;for(let y=-r;y<=r;y++)s+=a[Math.min(h-1,Math.max(0,y))*w+x];
+    for(let y=0;y<h;y++){o[y*w+x]=s/(2*r+1);s+=a[Math.min(h-1,y+r+1)*w+x]-a[Math.max(0,y-r)*w+x];}}}
+  return o;}
+function blur(a,w,h,sigma){if(sigma<0.5)return a;const r=Math.sqrt(12*sigma*sigma/3+1)/2;let o=a;for(let k=0;k<3;k++){o=boxPass(o,w,h,r,true);o=boxPass(o,w,h,r,false);}return o;}
+function resample(a,w,h,W,H){const o=new Float32Array(W*H);for(let y=0;y<H;y++){const fy=Math.min(h-1,Math.max(0,(y+.5)*h/H-.5)),y0=Math.floor(fy),y1=Math.min(h-1,y0+1),ty=fy-y0;
+  for(let x=0;x<W;x++){const fx=Math.min(w-1,Math.max(0,(x+.5)*w/W-.5)),x0=Math.floor(fx),x1=Math.min(w-1,x0+1),tx=fx-x0;
+  o[y*W+x]=(a[y0*w+x0]*(1-tx)+a[y0*w+x1]*tx)*(1-ty)+(a[y1*w+x0]*(1-tx)+a[y1*w+x1]*tx)*ty;}}return o;}
+function pixels(canvas,W,H){const c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');x.drawImage(canvas,0,0,W,H);return x.getImageData(0,0,W,H).data;}
+function fft1(re,im,inv){const n=re.length;for(let i=1,j=0;i<n;i++){let b=n>>1;for(;j&b;b>>=1)j^=b;j^=b;if(i<j){[re[i],re[j]]=[re[j],re[i]];[im[i],im[j]]=[im[j],im[i]];}}
+  for(let len=2;len<=n;len<<=1){const ang=2*Math.PI/len*(inv?1:-1),wr=Math.cos(ang),wi=Math.sin(ang);
+    for(let i=0;i<n;i+=len){let cr=1,ci=0;for(let k=0;k<len/2;k++){const a=i+k,b=a+len/2,tr=re[b]*cr-im[b]*ci,ti=re[b]*ci+im[b]*cr;
+      re[b]=re[a]-tr;im[b]=im[a]-ti;re[a]+=tr;im[a]+=ti;const nr=cr*wr-ci*wi;ci=cr*wi+ci*wr;cr=nr;}}}
+  if(inv){for(let i=0;i<n;i++){re[i]/=n;im[i]/=n;}}}
+function fft2(re,im,N,inv){const r=new Float64Array(N),i2=new Float64Array(N);
+  for(let y=0;y<N;y++){for(let x=0;x<N;x++){r[x]=re[y*N+x];i2[x]=im[y*N+x];}fft1(r,i2,inv);for(let x=0;x<N;x++){re[y*N+x]=r[x];im[y*N+x]=i2[x];}}
+  for(let x=0;x<N;x++){for(let y=0;y<N;y++){r[y]=re[y*N+x];i2[y]=im[y*N+x];}fft1(r,i2,inv);for(let y=0;y<N;y++){re[y*N+x]=r[y];im[y*N+x]=i2[y];}}}
+
+// ---------- the attention model ----------
+function analyze(){
+  const W=Math.min(480,src.width), H=Math.round(src.height*W/src.width), n=W*H;
+  const p=pixels(src,W,H);
+  const L=new Float32Array(n),RG=new Float32Array(n),BY=new Float32Array(n);
+  const SAT=new Float32Array(n);
+  for(let i=0;i<n;i++){const r=p[i*4]/255,g=p[i*4+1]/255,b=p[i*4+2]/255;L[i]=.299*r+.587*g+.114*b;RG[i]=r-g;BY[i]=(r+g)/2-b;SAT[i]=Math.max(r,g,b)-Math.min(r,g,b);}
+  // 1. spectral residual at 64 x 64
+  const N=64,q=pixels(src,N,N),re=new Float64Array(N*N),im=new Float64Array(N*N);
+  for(let i=0;i<N*N;i++)re[i]=(.299*q[i*4]+.587*q[i*4+1]+.114*q[i*4+2])/255;
+  fft2(re,im,N,false);
+  const amp=new Float32Array(N*N),la=new Float32Array(N*N);
+  for(let i=0;i<N*N;i++){amp[i]=Math.hypot(re[i],im[i])+1e-9;la[i]=Math.log(amp[i]);}
+  const avg=boxPass(boxPass(la,N,N,1,true),N,N,1,false);
+  for(let i=0;i<N*N;i++){const e=Math.exp(la[i]-avg[i]);re[i]=e*re[i]/amp[i];im[i]=e*im[i]/amp[i];}
+  fft2(re,im,N,true);
+  let sr=new Float32Array(N*N);for(let i=0;i<N*N;i++)sr[i]=re[i]*re[i]+im[i]*im[i];
+  sr=norm(resample(norm(blur(sr,N,N,2.5)),N,N,W,H));
+  // 2. center-surround contrast in brightness and color
+  const s1=W/150,s2=W/22;
+  const d=(a)=>{const f=blur(a,W,H,s1),c=blur(a,W,H,s2),o=new Float32Array(n);for(let i=0;i<n;i++)o[i]=Math.abs(f[i]-c[i]);return o;};
+  const dl=d(L),drg=d(RG),dby=d(BY);const cs0=new Float32Array(n);for(let i=0;i<n;i++)cs0[i]=dl[i]+.6*(drg[i]+dby[i]);
+  const cs=norm(blur(cs0,W,H,W/80));
+  // 3. large shapes and large type: edges at a coarse scale
+  const w6=Math.max(16,Math.round(W/5)),h6=Math.max(16,Math.round(H/5)),Lc=resample(L,W,H,w6,h6),ed=new Float32Array(w6*h6);
+  for(let y=1;y<h6-1;y++)for(let x=1;x<w6-1;x++){const i=y*w6+x;
+    const gx=Lc[i-w6+1]+2*Lc[i+1]+Lc[i+w6+1]-Lc[i-w6-1]-2*Lc[i-1]-Lc[i+w6-1];
+    const gy=Lc[i+w6-1]+2*Lc[i+w6]+Lc[i+w6+1]-Lc[i-w6-1]-2*Lc[i-w6]-Lc[i-w6+1];ed[i]=Math.hypot(gx,gy);}
+  const edge=norm(resample(norm(blur(ed,w6,h6,1.5)),w6,h6,W,H));
+  // 4 and 5. center and top bias
+  const m1=new Float32Array(n);
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++){const i=y*W+x,dx=(x-W/2)/(.32*W),dy=(y-H/2)/(.32*H);
+    m1[i]=.35*sr[i]+.25*cs[i]+.15*Math.exp(-(dx*dx+dy*dy)/2)+.15*edge[i]+.10*(1-y/H);}
+  let m1n=norm(blur(m1,W,H,W/70));
+  // map layer from the boxes the student drew
+  let m=m1n, m2=null;
+  const soft=(list,useArea)=>{const L=new Float32Array(n);if(!list.length)return L;const sig=.035*W;
+    const areas=list.map(b=>(b[2]-b[0])*(b[3]-b[1])),amax=Math.max(...areas);
+    list.forEach((b,k)=>{const x0=b[0]*W,y0=b[1]*H,x1=b[2]*W,y1=b[3]*H,wt=useArea?.65+.35*Math.sqrt(areas[k]/amax):1;
+      for(let y=0;y<H;y++)for(let x=0;x<W;x++){const dx=Math.max(x0-x,0,x-x1),dy=Math.max(y0-y,0,y-y1),dd=dx*dx+dy*dy;
+        const v=wt*Math.exp(-dd/(2*sig*sig))*(.55+.45*cs[y*W+x]);const i=y*W+x;if(v>L[i])L[i]=v;}});
+    return norm(blur(L,W,H,W/90));};
+  const mapList=maps();
+  if(visitor!=='all'){const wt=VW[visitor];
+    // Estimates for any kind of box the student has not marked, so every
+    // visitor view differs even on an unmarked poster. Marked boxes replace them.
+    const fine=new Float32Array(n);for(let y=1;y<H-1;y++)for(let x=1;x<W-1;x++){const i=y*W+x;fine[i]=Math.abs(L[i+1]-L[i-1])+Math.abs(L[i+W]-L[i-W]);}
+    const fd=blur(fine,W,H,W/90),sb=blur(SAT,W,H,W/120),txt=new Float32Array(n),pic=new Float32Array(n);
+    for(let i=0;i<n;i++){txt[i]=fd[i]*(1-Math.min(1,sb[i]*2.5));pic[i]=sb[i]*(.5+.5*cs[i]);}
+    const autoText=norm(txt),autoPic=norm(pic),autoMap=norm(blur(SAT,W,H,W/25));
+    const pick=(k,auto,f)=>{const l=boxes.filter(b=>b[4]===k);return l.length?soft(l,k==='map'):auto?auto.map(v=>v*f):new Float32Array(n);};
+    const lay={contrast:m1n,map:pick('map',autoMap,.75),legend:pick('legend',null,0),picture:pick('picture',autoPic,.75),text:pick('text',autoText,.75)};
+    const ks=Object.keys(wt).filter(k=>wt[k]>0),mw=Math.max(...ks.map(k=>wt[k])),sw=ks.reduce((a,k)=>a+wt[k],0);m=new Float32Array(n);
+    for(let i=0;i<n;i++){let mx=0,sm=0;for(const k of ks){const v=wt[k]*lay[k][i];if(v>mx)mx=v;sm+=v;}m[i]=.6*mx/mw+.4*sm/sw;}
+    m=norm(blur(m,W,H,W/80));}
+  else if(mapList.length){m2=new Float32Array(n);const sig=.035*W;
+    const areas=mapList.map(b=>(b[2]-b[0])*(b[3]-b[1])),amax=Math.max(...areas);
+    mapList.forEach((b,k)=>{const x0=b[0]*W,y0=b[1]*H,x1=b[2]*W,y1=b[3]*H,wt=.65+.35*Math.sqrt(areas[k]/amax);
+      for(let y=0;y<H;y++)for(let x=0;x<W;x++){const dx=Math.max(x0-x,0,x-x1),dy=Math.max(y0-y,0,y-y1),dd=dx*dx+dy*dy;
+        const v=wt*Math.exp(-dd/(2*sig*sig))*(.55+.45*cs[y*W+x]);const i=y*W+x;if(v>m2[i])m2[i]=v;}});
+    m2=norm(blur(m2,W,H,W/90));m=new Float32Array(n);
+    for(let i=0;i<n;i++)m[i]=.5*Math.max(m1n[i],m2[i])+.3*m1n[i]+.2*m2[i];m=norm(m);}
+  // statistics
+  let tot=0,inMap=0,top=0,quiet=0;
+  const inBox=(x,y)=>mapList.some(b=>x>=b[0]*W&&x<=b[2]*W&&y>=b[1]*H&&y<=b[3]*H);
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++){const v=m[y*W+x];tot+=v;if(y<.15*H)top+=v;if(v<.2)quiet++;if(mapList.length&&inBox(x,y))inMap+=v;}
+  // peaks = likely fixations, in order
+  const gw=Math.round(W/6),gh=Math.round(H/6),g=resample(m,W,H,gw,gh),cand=[];
+  for(let y=1;y<gh-1;y++)for(let x=1;x<gw-1;x++){const v=g[y*gw+x];if(v<.25)continue;let ok=true;
+    for(let j=-2;j<=2&&ok;j++)for(let i=-2;i<=2;i++){const yy=y+j,xx=x+i;if(yy<0||xx<0||yy>=gh||xx>=gw)continue;if(g[yy*gw+xx]>v){ok=false;break;}}
+    const fx=(x+.5)/gw,fy=(y+.5)/gh;if(ok&&fx>.05&&fx<.95&&fy>.03&&fy<.97)cand.push({x:fx,y:fy,v});}
+  cand.sort((a,b)=>b.v-a.v);const peaks=[],usedBox=new Set();
+  const whichBox=(x,y)=>{let best=-1,ba=Infinity;boxes.forEach((b,i)=>{if(x>=b[0]*W&&x<=b[2]*W&&y>=b[1]*H&&y<=b[3]*H){const ar=(b[2]-b[0])*(b[3]-b[1]);if(ar<ba){ba=ar;best=i;}}});return best;};
+  for(const c of cand){const bi=whichBox(c.x*W,c.y*H);if(bi>=0&&usedBox.has(bi))continue;
+    if(peaks.every(p=>Math.hypot((p.x-c.x)*W,(p.y-c.y)*H)>.17*Math.max(W,H))){peaks.push(c);if(bi>=0)usedBox.add(bi);}if(peaks.length===5)break;}
+  peaks.forEach(pk=>{const x=pk.x*W,y=pk.y*H,i=Math.round(y)*W+Math.round(x);
+    const bi=whichBox(x,y),bk=bi>=0?boxes[bi][4]:null;
+    if(bk==='map'){pk.kind='Map';pk.why=visitor==='newcomer'?'Colorful shapes. A newcomer sees a picture, not data.':'A large, detailed area with strong color. Geographers look for the map first.';}
+    else if(bk==='legend'){pk.kind='Legend';pk.why='The key to the map. GIS readers check it to know what the colors mean.';}
+    else if(bk==='picture'){pk.kind='Picture';pk.why='Photos and drawings pull the eye of anyone who is not reading closely.';}
+    else if(bk==='text'){pk.kind='Text';pk.why=visitor==='expert'?'Method and results text. An expert reads it to decide whether to trust the map.':'A block of text that someone stops to read.';}
+    else if(pk.y<.2&&edge[i]>.45){pk.kind='Title';pk.why='Big type near the top. This is where most people start.';}
+    else if(cs[i]>.55){pk.kind='Contrast';pk.why='Bright or saturated color against its surroundings pulls the eye.';}
+    else if(edge[i]>.5){pk.kind='Large shapes';pk.why='Large type, a chart or a photo with strong edges.';}
+    else{pk.kind='Middle';pk.why='Near the center. Eyes drift here when nothing stronger competes.';}});
+  // heat image at analysis size
+  const hc=document.createElement('canvas');hc.width=W;hc.height=H;const hx=hc.getContext('2d'),id=hx.createImageData(W,H);
+  for(let i=0;i<n;i++){const [r,gg,b]=ramp(m[i]);id.data[i*4]=r;id.data[i*4+1]=gg;id.data[i*4+2]=b;id.data[i*4+3]=Math.round(255*(.18+.62*Math.pow(m[i],1.2)));}
+  hx.putImageData(id,0,0);
+  result={hc,peaks,stats:{map:mapList.length?inMap/tot:null,top:top/tot,quiet:quiet/n}};
+}
+const STOPS=[[0,[27,42,107]],[.25,[31,143,179]],[.45,[127,211,107]],[.62,[247,212,58]],[.82,[232,84,30]],[1,[163,16,27]]];
+function ramp(v){for(let k=1;k<STOPS.length;k++){if(v<=STOPS[k][0]){const [a,ca]=STOPS[k-1],[b,cb]=STOPS[k],t=(v-a)/(b-a);return ca.map((c,j)=>Math.round(c+(cb[j]-c)*t));}}return STOPS[STOPS.length-1][1];}
+
+// ---------- color-vision simulation (Machado et al. 2009, full severity) ----------
+const CVD={protan:[.152286,1.052583,-.204868,.114503,.786281,.099216,-.003882,-.048116,1.051998],
+           deutan:[.367322,.860646,-.227968,.280085,.672501,.047413,-.011820,.042940,.968881],
+           tritan:[1.255528,-.076749,-.178779,-.078411,.930809,.147602,.004733,.691367,.303900]};
+const toLin=c=>{c/=255;return c<=.04045?c/12.92:Math.pow((c+.055)/1.055,2.4);};
+const toS=c=>{c=Math.min(1,Math.max(0,c));return 255*(c<=.0031308?12.92*c:1.055*Math.pow(c,1/2.4)-.055);};
+const LUT=new Float32Array(256).map((_,i)=>toLin(i));
+
+// ---------- drawing ----------
+function render(){
+  if(!src)return;
+  view.width=src.width;view.height=src.height;
+  vctx.filter='none';vctx.globalAlpha=1;
+  if(mode==='far'){vctx.filter='blur('+Math.max(2,src.width/260).toFixed(1)+'px)';vctx.drawImage(src,0,0);vctx.filter='none';}
+  else vctx.drawImage(src,0,0);
+  if(mode==='gray'||CVD[mode]){const im=vctx.getImageData(0,0,view.width,view.height),d=im.data,M=CVD[mode];
+    for(let i=0;i<d.length;i+=4){const r=LUT[d[i]],g=LUT[d[i+1]],b=LUT[d[i+2]];
+      if(!M){const y=toS(.2126*r+.7152*g+.0722*b);d[i]=d[i+1]=d[i+2]=y;}
+      else{d[i]=toS(M[0]*r+M[1]*g+M[2]*b);d[i+1]=toS(M[3]*r+M[4]*g+M[5]*b);d[i+2]=toS(M[6]*r+M[7]*g+M[8]*b);}}
+    vctx.putImageData(im,0,0);}
+  if(mode==='attention'&&result){
+    const im=vctx.getImageData(0,0,view.width,view.height),d=im.data;
+    for(let i=0;i<d.length;i+=4){const y=.299*d[i]+.587*d[i+1]+.114*d[i+2];d[i]=d[i+1]=d[i+2]=y*.55+115*.45;}
+    vctx.putImageData(im,0,0);vctx.imageSmoothingEnabled=true;vctx.drawImage(result.hc,0,0,view.width,view.height);
+    const R=Math.max(14,view.width/55);
+    result.peaks.forEach((p,k)=>{const x=p.x*view.width,y=p.y*view.height;
+      vctx.beginPath();vctx.arc(x,y,R,0,7);vctx.fillStyle='#111';vctx.fill();vctx.lineWidth=R/5;vctx.strokeStyle='#fff';vctx.stroke();
+      vctx.fillStyle='#fff';vctx.font='700 '+Math.round(R*1.15)+'px "Atkinson Hyperlegible",sans-serif';vctx.textAlign='center';vctx.textBaseline='middle';vctx.fillText(String(k+1),x,y+1);});
+  }
+  const mark=getComputedStyle(document.documentElement).getPropertyValue('--mark').trim()||'#C2410C';
+  vctx.setLineDash([view.width/90,view.width/150]);vctx.lineWidth=Math.max(2,view.width/400);vctx.strokeStyle=mark;
+  const all=drag?boxes.concat([drag]):boxes;
+  all.forEach(b=>{const x=Math.min(b[0],b[2])*view.width,y=Math.min(b[1],b[3])*view.height;vctx.strokeStyle=KCOL[b[4]]||mark;vctx.strokeRect(x,y,Math.abs(b[2]-b[0])*view.width,Math.abs(b[3]-b[1])*view.height);
+    if(b[4]){const fs=Math.max(12,view.width/80);vctx.font='700 '+fs+'px "Atkinson Hyperlegible",sans-serif';vctx.textAlign='left';vctx.textBaseline='top';const t=b[4].toUpperCase(),tw=vctx.measureText(t).width;
+      vctx.fillStyle=KCOL[b[4]]||mark;vctx.fillRect(x,y,tw+fs*.6,fs*1.4);vctx.fillStyle='#fff';vctx.fillText(t,x+fs*.3,y+fs*.2);}});
+  vctx.setLineDash([]);
+  document.getElementById('legend').hidden=mode!=='attention';
+}
+function report(){
+  const s=result.stats,pct=v=>Math.round(v*100)+'%';
+  document.getElementById('sMap').textContent=s.map==null?'–':pct(s.map);
+  document.getElementById('sTop').textContent=pct(s.top);
+  document.getElementById('sQuiet').textContent=pct(s.quiet);
+  const ol=document.getElementById('order');ol.innerHTML='';
+  result.peaks.forEach((p,k)=>{const li=document.createElement('li');
+    li.innerHTML='<span class="num">'+(k+1)+'</span><div><span class="tag">'+p.kind+'</span><br>'+p.why+'</div>';ol.appendChild(li);});
+  if(!maps().length){const li=document.createElement('li');li.innerHTML='<span class="num">!</span><div><span class="tag">No maps marked</span><br>Click "Mark a map" and drag a box around each map, so the check knows where they are.</div>';ol.appendChild(li);}
+  if(visitor!=='all'&&!boxes.some(b=>b[4]!=='map')){const li=document.createElement('li');li.innerHTML='<span class="num">!</span><div><span class="tag">Mark more boxes</span><br>The visitor views need your legends, pictures and text blocks marked too.</div>';ol.appendChild(li);}
+}
+function run(){status.textContent='Working…';setTimeout(()=>{try{analyze();report();render();status.textContent='';}catch(e){status.textContent='The check failed on this image: '+e.message+'. Try exporting the poster as a PNG.';}},20);}
+
+// ---------- loading ----------
+function setSource(img,w,h){const MAX=1400,sc=Math.min(1,MAX/Math.max(w,h));src=document.createElement('canvas');src.width=Math.round(w*sc);src.height=Math.round(h*sc);
+  const x=src.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,src.width,src.height);x.drawImage(img,0,0,src.width,src.height);run();}
+async function loadFile(f){
+  if(!f)return;boxes=[];status.textContent='Reading '+f.name+'…';
+  hint.textContent='Showing '+f.name+'. Click "Mark a map" and drag a box around each map. To save the result, right-click the poster and choose "Save image as", or take a screenshot.';
+  try{
+    if(f.type==='application/pdf'||/\.pdf$/i.test(f.name)){
+      if(!window.pdfjsLib)throw new Error('the PDF reader did not load');
+      pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      const pdf=await pdfjsLib.getDocument({data:new Uint8Array(await f.arrayBuffer())}).promise,pg=await pdf.getPage(1);
+      const v0=pg.getViewport({scale:1}),vp=pg.getViewport({scale:1400/Math.max(v0.width,v0.height)});
+      const c=document.createElement('canvas');c.width=Math.round(vp.width);c.height=Math.round(vp.height);
+      const cx=c.getContext('2d');cx.fillStyle='#fff';cx.fillRect(0,0,c.width,c.height);
+      await pg.render({canvasContext:cx,viewport:vp}).promise;setSource(c,c.width,c.height);
+    }else{const url=URL.createObjectURL(f),img=new Image();img.onload=()=>{setSource(img,img.naturalWidth,img.naturalHeight);URL.revokeObjectURL(url);};
+      img.onerror=()=>{status.textContent='That file is not an image this browser can open. Export the poster as PNG, JPG or PDF.';};img.src=url;}
+  }catch(e){status.textContent='Could not open '+f.name+': '+e.message+'. Export the poster as a PNG and try again.';}
+}
+document.getElementById('file').addEventListener('change',e=>loadFile(e.target.files[0]));
+const stage=document.getElementById('stage');
+stage.addEventListener('dragover',e=>{e.preventDefault();stage.classList.add('drop');});
+stage.addEventListener('dragleave',()=>stage.classList.remove('drop'));
+stage.addEventListener('drop',e=>{e.preventDefault();stage.classList.remove('drop');loadFile(e.dataTransfer.files[0]);});
+
+// ---------- views and box drawing ----------
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.view;
+  document.querySelectorAll('[data-view]').forEach(o=>o.setAttribute('aria-pressed',String(o===b)));render();}));
+const NAMES={map:'map',legend:'legend',picture:'photo or drawing',text:'block of text'};
+document.querySelectorAll('.mk').forEach(btn=>btn.addEventListener('click',()=>{const k=btn.dataset.kind;drawKind=drawKind===k?null:k;
+  document.querySelectorAll('.mk').forEach(o=>o.setAttribute('aria-pressed',String(o.dataset.kind===drawKind)));view.classList.toggle('drawing',!!drawKind);
+  status.textContent=drawKind?'Drag a box around each '+NAMES[drawKind]+'.':'';}));
+document.querySelectorAll('[data-visitor]').forEach(b=>b.addEventListener('click',()=>{visitor=b.dataset.visitor;
+  document.querySelectorAll('[data-visitor]').forEach(o=>o.setAttribute('aria-pressed',String(o===b)));
+  const V={all:'Everyone: the general attention model.',newcomer:'Newcomer: knows no geography. Reads the title, looks at pictures and bright color, skips legends and methods.',gis:'GIS basics: goes to the map first, then the legend, scale and title.',expert:'GIS expert: reads the map, legend, method and results, and asks whether to trust the map.'};
+  document.getElementById('vhint').textContent=V[visitor];if(mode!=='attention'){mode='attention';document.querySelectorAll('[data-view]').forEach(o=>o.setAttribute('aria-pressed',String(o.dataset.view==='attention')));}run();}));
+document.getElementById('clearBtn').addEventListener('click',()=>{boxes=[];run();});
+const pos=e=>{const r=view.getBoundingClientRect();return[Math.min(1,Math.max(0,(e.clientX-r.left)/r.width)),Math.min(1,Math.max(0,(e.clientY-r.top)/r.height))];};
+view.addEventListener('pointerdown',e=>{if(!drawKind)return;const p=pos(e);drag=[p[0],p[1],p[0],p[1],drawKind];view.setPointerCapture(e.pointerId);});
+view.addEventListener('pointermove',e=>{if(!drag)return;const p=pos(e);drag[2]=p[0];drag[3]=p[1];render();});
+view.addEventListener('pointerup',()=>{if(!drag)return;const b=[Math.min(drag[0],drag[2]),Math.min(drag[1],drag[3]),Math.max(drag[0],drag[2]),Math.max(drag[1],drag[3]),drag[4]];drag=null;
+  if((b[2]-b[0])>.02&&(b[3]-b[1])>.02){boxes.push(b);run();}else render();});
+
+// ---------- the example poster (made up for this page) ----------
+function sample(){
+  const c=document.createElement('canvas');c.width=1440;c.height=1080;const x=c.getContext('2d');
+  x.fillStyle='#fbfbf8';x.fillRect(0,0,1440,1080);
+  x.fillStyle='#1e3d34';x.fillRect(0,0,1440,150);
+  x.fillStyle='#fff';x.font='700 62px "Barlow Condensed",sans-serif';x.fillText('Where the Nearest Grocery Store Is Too Far',48,92);
+  x.font='26px "Atkinson Hyperlegible",sans-serif';x.fillStyle='#cfe3db';x.fillText('Example poster, made up for this page · GEOG 476',50,130);
+  // map frame
+  x.fillStyle='#eef1ee';x.fillRect(420,190,640,620);
+  const cols=['#fef0d9','#fdcc8a','#fc8d59','#e34a33','#b30000'];let seed=7;const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647;};
+  for(let r=0;r<13;r++)for(let q=0;q<12;q++){const cx=470+q*46+(r%2)*23,cy=235+r*40,dx=(cx-740)/300,dy=(cy-500)/290;if(dx*dx+dy*dy>1)continue;
+    const v=Math.min(4,Math.floor((rnd()*.6+(1-Math.hypot(dx+.3,dy-.2))*.9)*4.2));
+    x.beginPath();for(let k=0;k<6;k++){const a=Math.PI/3*k+Math.PI/6;x.lineTo(cx+25*Math.cos(a),cy+25*Math.sin(a));}x.closePath();x.fillStyle=cols[Math.max(0,v)];x.fill();x.strokeStyle='#fff';x.lineWidth=2;x.stroke();}
+  x.fillStyle='#333';x.font='22px "Atkinson Hyperlegible",sans-serif';x.fillText('Miles to the nearest full-service grocery store',440,790);
+  cols.forEach((cl,k)=>{x.fillStyle=cl;x.fillRect(440+k*70,740,60,22);});
+  // text columns
+  const para=(X,Y,w,lines,head)=>{x.fillStyle='#1e3d34';x.font='700 34px "Barlow Condensed",sans-serif';x.fillText(head,X,Y);
+    x.fillStyle='#9aa39f';for(let i=0;i<lines;i++)x.fillRect(X,Y+26+i*24,w*(i%4===3?.6:1),11);};
+  para(48,220,320,10,'The question');para(48,520,320,12,'Data and method');
+  para(1100,220,300,6,'What we found');
+  // bar chart
+  x.fillStyle='#1e3d34';x.font='700 34px "Barlow Condensed",sans-serif';x.fillText('Households over 10 miles',1100,450);
+  [180,120,90,60,40].forEach((h,k)=>{x.fillStyle='#4a7c6b';x.fillRect(1110+k*56,690-h,40,h);});
+  x.fillStyle='#333';x.fillRect(1100,690,290,3);
+  // footer with logos
+  x.fillStyle='#e4e8e5';x.fillRect(0,960,1440,120);
+  x.fillStyle='#500000';x.fillRect(48,985,180,70);x.fillStyle='#7a8a84';x.fillRect(250,985,140,70);
+  x.fillStyle='#9aa39f';for(let i=0;i<3;i++)x.fillRect(440,995+i*22,700,10);
+  boxes=[[420/1440,190/1080,1060/1440,810/1080,'map'],[430/1440,725/1080,800/1440,800/1080,'legend'],[40/1440,180/1080,380/1440,480/1080,'text'],[40/1440,480/1080,380/1440,800/1080,'text'],[1090/1440,180/1080,1420/1440,380/1080,'text'],[40/1440,975/1080,400/1440,1065/1080,'picture']];
+  hint.textContent='Showing the example poster, which is made up for this page. Upload yours to replace it. Dropping a file onto the poster works too. To save the result, right-click the poster and choose "Save image as", or take a screenshot.';
+  src=c;run();
+}
+document.getElementById('sampleBtn').addEventListener('click',sample);
+document.querySelectorAll('details.help').forEach(d=>d.addEventListener('toggle',()=>{if(d.open)document.querySelectorAll('details.help').forEach(o=>{if(o!==d)o.open=false;});}));
+document.addEventListener('click',e=>{if(!e.target.closest('details.help'))document.querySelectorAll('details.help[open]').forEach(o=>o.open=false);});
+(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(sample);
+})();
+</script>
+</html>
