@@ -7,7 +7,7 @@
 | --- | --- |
 | Syllabus | [`01_Syllabus/Syllabus_F26.html`](01_Syllabus/Syllabus_F26.html) |
 
-## Pages (75)
+## Pages (77)
 
 | Page | File |
 | --- | --- |
@@ -65,6 +65,7 @@
 | W07 — Resumes | [`02_Pages/lectures/W07.html`](02_Pages/lectures/W07.html) |
 | W08 — Portfolios | [`02_Pages/lectures/W08.html`](02_Pages/lectures/W08.html) |
 | W09 — Professional Presentations | [`02_Pages/lectures/W09.html`](02_Pages/lectures/W09.html) |
+| W10 — Professional Posters | [`02_Pages/lectures/W10.html`](02_Pages/lectures/W10.html) |
 | W11 — Technical Presentations | [`02_Pages/lectures/W11.html`](02_Pages/lectures/W11.html) |
 | W12 — Writing for Decision-Makers — Leading with the Answer | [`02_Pages/lectures/W12.html`](02_Pages/lectures/W12.html) |
 | W13 — GIS Day — Presentations | [`02_Pages/lectures/W13.html`](02_Pages/lectures/W13.html) |
@@ -82,6 +83,7 @@
 | S05 — Reproducible Workflow | [`02_Pages/studios/S05.html`](02_Pages/studios/S05.html) |
 | S06 — Scaling & First Integration | [`02_Pages/studios/S06.html`](02_Pages/studios/S06.html) |
 | S07 — Portfolio Build on GitHub Pages | [`02_Pages/studios/S07.html`](02_Pages/studios/S07.html) |
+| S08 — Interpretation & Team Synthesis | [`02_Pages/studios/S08.html`](02_Pages/studios/S08.html) |
 | S09 — Cartographic Design | [`02_Pages/studios/S09.html`](02_Pages/studios/S09.html) |
 | S10 — Poster Architecture | [`02_Pages/studios/S10.html`](02_Pages/studios/S10.html) |
 | S11 — Dry Run & Hostile Question and Answer | [`02_Pages/studios/S11.html`](02_Pages/studios/S11.html) |

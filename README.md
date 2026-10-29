@@ -15,7 +15,7 @@ rest.
 
 ## What this is
 
-**114 pages**, in four folders: the syllabus, 75 reference and session pages, 37 assignments and 1 rubric page.
+**116 pages**, in four folders: the syllabus, 77 reference and session pages, 37 assignments and 1 rubric page.
 
 Every page is standalone HTML with its styling inline. There is no build step, no
 JavaScript, and no images — open any file in a browser, or paste its source into a
